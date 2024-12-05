@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.;
+//using UnityEngine.;
 
 public class spawnBuilding : MonoBehaviour
 {
@@ -13,11 +13,11 @@ public class spawnBuilding : MonoBehaviour
         cam = Camera.main;
     }
 
-    private void SpawnAtMousePos()
-    {
-        if (Mouse.)
-        {
+    //private void SpawnAtMousePos()
+    //{
+    //    if (Mouse.)
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }

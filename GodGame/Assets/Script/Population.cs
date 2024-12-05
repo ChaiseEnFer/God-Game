@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.AI.Navigation;
-using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
+using UnityEngine;
+using System.Collections;
 
 public class Population : MonoBehaviour
 {
@@ -15,20 +12,21 @@ public class Population : MonoBehaviour
 
     [SerializeField]
     private float _seuil = 1.05f;
-    
-    [SerializeField]
-    private int _radius = 10;
 
     [SerializeField]
-    private float _currentTime = 0f;
+    private int _radius = 20;
 
+    [SerializeField]
+    private float _chrono = 0.5f;
+
+    private bool _isStartTimer = false;
     private int _posX = 0;
 
     private int _posZ = 0;
 
-    private bool _isStartedTimer = false;  
-
     private Vector3 _targetPs = Vector3.zero;
+
+    private Coroutine _currentCoroutine = null;  
 
     private void Start()
     {
@@ -37,22 +35,7 @@ public class Population : MonoBehaviour
 
     private void Update()
     {
-
-        if (_isStartedTimer)
-        {
-            if (_currentTime >= 1.5f)
-            {
-                Deplacement();
-                _currentTime = 0f;
-                _isStartedTimer = false;
-            }
-            else
-            {
-                _currentTime += Time.deltaTime;
-            }
-        }
-
-       
+        Deplacement();
     }
 
     public Vector3 RandomNavmeshLocation(float radius)
@@ -70,15 +53,32 @@ public class Population : MonoBehaviour
 
     private void Deplacement()
     {
+        
         if (_people.remainingDistance > _seuil)
         {
-            _isStartedTimer = true;
+            if (_currentCoroutine == null) 
+            {
+                _currentCoroutine = StartCoroutine(WaitBeforeMove());
+            }
             return;
         }
 
-
         _targetPs = RandomNavmeshLocation(_radius);
-        _people.SetDestination(_targetPs);
 
+        _people.isStopped = true;
+        _people.ResetPath();
+
+        if (_currentCoroutine == null)
+        {
+            _currentCoroutine = StartCoroutine(WaitBeforeMove());
+        }
+    }
+
+    private IEnumerator WaitBeforeMove()
+    {
+        yield return new WaitForSeconds(_chrono);
+        _currentCoroutine = null;
+        _people.SetDestination(_targetPs);
+        _people.isStopped = false;
     }
 }
