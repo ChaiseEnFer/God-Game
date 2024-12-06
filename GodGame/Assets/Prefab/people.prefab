@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _people: {fileID: 2760313575652862680}
-  _positionPeople: {fileID: 3137331412485113873}
+  _peopleLife: {fileID: 3137331412485113873}
   _seuil: 1.05
   _radius: 10
   _chrono: 0.5
+  _timeLife: 0

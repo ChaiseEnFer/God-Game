@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class TaskPeople : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //barre de fatigue
+    //dire ou il va
+    //faire les métiers
 }
