@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> miners = new();
     public List<GameObject> masons = new();
 
+    //variables
+    public GameObject selectedCharacter;
+
     void Start()
     {
         

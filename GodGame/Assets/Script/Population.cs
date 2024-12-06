@@ -86,7 +86,8 @@ public class Population : MonoBehaviour
                 _currentCoroutine ??= StartCoroutine(WaitBeforeMove());
                 break;
 
-
+            default:
+                break;
         }
     }
 
