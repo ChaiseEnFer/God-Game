@@ -8,15 +8,16 @@ public class spawnBuilding : MonoBehaviour
     private GameObject _house = null;
     [SerializeField]
     private GameObject _school = null;
+    [SerializeField]
+    private GameObject _preview = null;
 
     [SerializeField]
     private GameObject _buildParent = null;
 
-    private GameObject _preview = null;
+    private GameObject _previewSave = null;
     private GameObject _buildSelected = null;
     private Camera _cam = null;
     private bool _buildMode = false;
-    private float _timerPreview = 0.0f;
 
     private void Start()
     {
@@ -30,7 +31,7 @@ public class spawnBuilding : MonoBehaviour
         {
             SpawnAtMousePos();
 
-            BuildPreview();
+            BuildPreviewUpdate();
         }
     }
 
@@ -45,33 +46,36 @@ public class spawnBuilding : MonoBehaviour
     public void EnterBuildMode()
     {
         _buildMode = true;
-    }
-    public void ExitBuildMode()
-    {
-        _buildMode = false;
-    }
-
-
-    private void BuildPreview()
-    {
-        if (_timerPreview > 0.01f)
+        if (_previewSave == null)
         {
-            Destroy(_preview);
             Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log(hit.collider.tag);
-                if (hit.collider.tag != "build")
-                {
-                    _preview = Instantiate(_buildSelected, hit.point, Quaternion.identity);
-                }
+                _previewSave = Instantiate(_preview, hit.point, Quaternion.identity);
+                _previewSave.transform.parent = transform;
             }
-            _timerPreview = 0.0f;
         }
-        else
+    }
+    public void ExitBuildMode()
+    {
+        _buildMode = false;
+        if (_previewSave != null)
         {
-            _timerPreview += Time.deltaTime;
+            Destroy(_previewSave);
+        }
+    }
+
+    private void BuildPreviewUpdate()
+    {
+        Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.tag != "build")
+            {
+                _previewSave.transform.position = hit.point;
+            }       
         }
     }
     private void SpawnAtMousePos()
@@ -82,8 +86,11 @@ public class spawnBuilding : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                GameObject newBuild = Instantiate(_buildSelected, hit.point, Quaternion.identity);
-                newBuild.transform.parent = _buildParent.transform;
+                if (hit.collider.tag != "build")
+                {
+                    GameObject newBuild = Instantiate(_buildSelected, hit.point, Quaternion.identity);
+                    newBuild.transform.parent = _buildParent.transform;
+                }
             }
         }
     }
