@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,31 +33,55 @@ public class GameManager : MonoBehaviour
     public GameObject SelectedCharacter;
     public int EntitiesNumber = 0;
     public int FoodQuantity;
-    
+    public bool IsDayRunning = false;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
-    private void CheckForHouses()
+    /// <summary>
+    /// Cette méthode vérifie pour chaque people fatigué, s'il y a un lit de disponible et lui permet de se reposer
+    /// </summary>
+    public void CheckForHouses()
     {
         List<GameObject> _availableHouses = new();
         foreach (GameObject people in AllPeople)
         {
             if (people.GetComponent<PeopleProperties>().IsTired )
             {
-                foreach (GameObject house in _availableHouses)
+                if (_availableHouses.Count == 0)
                 {
-                    people.GetComponent<PeopleProperties>().IsTired = false;
-                    people.GetComponent<PeopleProperties>().Tireness = 100;
-                    _availableHouses.Remove(house);
+                    return;
                 }
+                else
+                {
+                    foreach (GameObject house in _availableHouses)
+                    {
+                        people.GetComponent<PeopleProperties>().IsTired = false;
+                        people.GetComponent<PeopleProperties>().Tireness = 100;
+                        people.GetComponent<Population>().TargetPs = house.transform.position;
+                        _availableHouses.Remove(house);
+                    }
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Cette méthode vérifie que personne ne manque de nourriture et sinon les tuent
+    /// </summary>
+    public void CheckIfEnoughFood()
+    {
+        if (FoodQuantity > AllPeople.Count)
+        {
+            FoodQuantity -= AllPeople.Count;
+        }
+        else
+        {
+            for (int i = 0; i < FoodQuantity; i++)
+            {
+                int randomIndex = Random.Range(0, AllPeople.Count);
+
+                GameObject peopleToDestroy = AllPeople[randomIndex];
+                AllPeople.Remove(peopleToDestroy);
+                Destroy(peopleToDestroy);
+                FoodQuantity = 0;
             }
         }
     }
