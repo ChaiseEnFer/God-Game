@@ -6,7 +6,10 @@ using UnityEngine;
 public class TextHandler : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshPro _text;
+    private TextMeshProUGUI _text;
 
-
+    private void UpdateText()
+    {
+        
+    }
 }
