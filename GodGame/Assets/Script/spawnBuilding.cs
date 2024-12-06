@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class spawnBuilding : MonoBehaviour
 {
@@ -8,6 +10,12 @@ public class spawnBuilding : MonoBehaviour
     private GameObject _house = null;
     [SerializeField]
     private GameObject _school = null;
+    [SerializeField]
+    private GameObject _farm = null;
+    [SerializeField]
+    private GameObject _library = null;
+    [SerializeField]
+    private GameObject _museum = null;
     [SerializeField]
     private GameObject _preview = null;
 
@@ -43,6 +51,18 @@ public class spawnBuilding : MonoBehaviour
     {
         _buildSelected = _school;
     }
+    public void ChangeBuildToFarm()
+    {
+        _buildSelected = _farm;
+    }
+    public void ChangeBuildToLibrary()
+    {
+        _buildSelected = _library;
+    }
+    public void ChangeBuildToMuseum()
+    {
+        _buildSelected = _museum;
+    }
     public void EnterBuildMode()
     {
         _buildMode = true;
@@ -74,8 +94,23 @@ public class spawnBuilding : MonoBehaviour
         {
             if (hit.collider.tag != "build")
             {
-                _previewSave.transform.position = hit.point;
-            }       
+                if (_previewSave != null)
+                {
+                    _previewSave.transform.position = hit.point;
+                }
+                else
+                {
+                    _previewSave = Instantiate(_preview, hit.point, Quaternion.identity);
+                    _previewSave.transform.parent = transform;
+                }
+            }
+            else 
+            {
+                if (_previewSave != null)
+                {
+                    Destroy(_previewSave);
+                }
+            }
         }
     }
     private void SpawnAtMousePos()
@@ -86,7 +121,7 @@ public class spawnBuilding : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.tag != "build")
+                if (hit.collider.tag != "build" && !EventSystem.current.IsPointerOverGameObject())
                 {
                     GameObject newBuild = Instantiate(_buildSelected, hit.point, Quaternion.identity);
                     newBuild.transform.parent = _buildParent.transform;

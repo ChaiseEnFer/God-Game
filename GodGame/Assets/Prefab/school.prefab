@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 571578599403613804}
   - component: {fileID: 783941822426055487}
   m_Layer: 0
-  m_Name: school
+  m_Name: School
   m_TagString: build
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b86000664ce9cd047a45575b532afb6c, type: 2}
+  - {fileID: 2100000, guid: abe90ee1b1f49a1468057032b3d60c1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 1, z: 1.75}
+  m_Center: {x: 0, y: 0, z: -0.37}
