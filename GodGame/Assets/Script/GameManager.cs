@@ -29,11 +29,17 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Miners = new();
     public List<GameObject> Masons = new();
 
-    //variables
+    //variables publiques
     public GameObject SelectedCharacter;
     public int EntitiesNumber = 0;
     public int FoodQuantity;
     public bool IsDayRunning = false;
+    public int ActualHappiness;
+
+    //variables privées
+    private int _maxHappiness;
+
+    //Methodes a appeler a chaque fin de jour
 
     /// <summary>
     /// Cette méthode vérifie pour chaque people fatigué, s'il y a un lit de disponible et lui permet de se reposer
@@ -83,6 +89,41 @@ public class GameManager : MonoBehaviour
                 Destroy(peopleToDestroy);
                 FoodQuantity = 0;
             }
+        }
+    }
+
+    /// <summary>
+    /// Ajoute le bonheur selon le nombre de batiments qui en produisent
+    /// </summary>
+    public void AddHappiness() // A rédiger une fois qu'on aura merge le taf de victor
+    {
+        /*foreach (GameObject house in TerrainManager.Instance.AllHouse)
+        {
+            ActualHappiness += house.GetComponent<INFODUBATIMENT>().AddedHappiness;
+        }*/
+    }
+
+    //Conditions de fin de partie
+
+    /// <summary>
+    /// Verifie la condition de décimation de la population
+    /// </summary>
+    public void CheckForDecimatedPopulation()
+    {
+        if (AllPeople.Count <= 0)
+        {
+            //FIN DE PARTIE - DEFAITE
+        }
+    }
+
+    /// <summary>
+    /// Verifie la condition de victoire : bonheur au max
+    /// </summary>
+    public void CheckForHappiness()
+    {
+        if (ActualHappiness >= _maxHappiness)
+        {
+            //FIN DE PARTIE - VICTOIRE
         }
     }
 }

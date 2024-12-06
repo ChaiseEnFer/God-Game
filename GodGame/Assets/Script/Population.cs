@@ -20,7 +20,7 @@ public class Population : MonoBehaviour
     private float _chrono = 0.5f;
 
     [SerializeField]
-    private int _timeLife = 0;
+    //private int _timeLife = 0;
 
     private PeopleProperties _propertiesScript;
 

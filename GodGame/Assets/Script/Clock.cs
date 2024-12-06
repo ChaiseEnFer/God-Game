@@ -25,6 +25,9 @@ public class Clock : MonoBehaviour
         UpdateDayTime();
     }
 
+    /// <summary>
+    /// Permet de compter les heures puis dincrémenter les jours, de définir les horaires de travail et de dire quand il est lheure de se reposer
+    /// </summary>
     private void UpdateDayTime()
     {
         if(ActualMinute >= 60)
@@ -34,13 +37,13 @@ public class Clock : MonoBehaviour
 
             if(ActualHour == _dayFinishHour)
             {
-                _isDayFinished=true;
+                GameManager.Instance.IsDayRunning = false;
 
             }
 
             if (ActualHour == _dayStartHour)
             {
-                _isDayFinished = false;
+                GameManager.Instance.IsDayRunning = true;
                 _isActivated=true;
             }
 
@@ -55,11 +58,20 @@ public class Clock : MonoBehaviour
             ActualMinute += Time.deltaTime*10;
         }
 
-        if(_isDayFinished && !_isActivated)
+        if(!GameManager.Instance.IsDayRunning && !_isActivated)
         {
             GameManager.Instance.CheckIfEnoughFood();
             GameManager.Instance.CheckForHouses();
+
+            foreach (GameObject people in GameManager.Instance.AllPeople)
+            {
+                people.GetComponent<PeopleProperties>().Age++;
+                people.GetComponent<PeopleProperties>().CheckForAge();
+            }
+
             _isActivated = true;
         }
     }
+
+
 }
