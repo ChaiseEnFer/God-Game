@@ -22,17 +22,23 @@ public class Population : MonoBehaviour
     [SerializeField]
     private int _timeLife = 0;
 
-    private bool _isStartTimer = false;
-    private int _posX = 0;
-
-    private int _posZ = 0;
+    private PeopleProperties _propertiesScript;
 
     private Vector3 _targetPs = Vector3.zero;
 
-    private Coroutine _currentCoroutine = null;  
+    private Coroutine _currentCoroutine = null;
+
+    private IEnumerator WaitBeforeMove()
+    {
+        yield return new WaitForSeconds(_chrono);
+        _currentCoroutine = null;
+        _people.SetDestination(_targetPs);
+        _people.isStopped = false;
+    }
 
     private void Start()
     {
+        _propertiesScript = gameObject.GetComponent<PeopleProperties>();
         Deplacement();
     }
 
@@ -41,6 +47,11 @@ public class Population : MonoBehaviour
         Deplacement();
     }
 
+    /// <summary>
+    /// Fonction qui retourne un point aléatoire naviguable autour de l'entité
+    /// </summary>
+    /// <param name="radius">rayon de la recherche de point</param>
+    /// <returns>Vector3 : point naviguable cible</returns>
     public Vector3 RandomNavmeshLocation(float radius)
     {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
@@ -54,41 +65,35 @@ public class Population : MonoBehaviour
         return finalPosition;
     }
 
+    /// <summary>
+    /// Fonction de déplacement automatique des peoples
+    /// </summary>
     private void Deplacement()
     {
-        
-        if (_people.remainingDistance > _seuil)
+        switch (_propertiesScript.job) //terminer les jobs quand map faite et navmeshée
         {
-            if (_currentCoroutine == null) 
-            {
-                _currentCoroutine = StartCoroutine(WaitBeforeMove());
-            }
-            return;
+            case 0:
+                if (_people.remainingDistance > _seuil)
+                {
+                    _currentCoroutine ??= StartCoroutine(WaitBeforeMove());
+                    return;
+                }
+                _targetPs = RandomNavmeshLocation(_radius);
+
+                _people.isStopped = true;
+                _people.ResetPath();
+
+                _currentCoroutine ??= StartCoroutine(WaitBeforeMove());
+                break;
+
+
         }
-
-        _targetPs = RandomNavmeshLocation(_radius);
-
-        _people.isStopped = true;
-        _people.ResetPath();
-
-        if (_currentCoroutine == null)
-        {
-            _currentCoroutine = StartCoroutine(WaitBeforeMove());
-        }
-    }
-
-    private IEnumerator WaitBeforeMove()
-    {
-        yield return new WaitForSeconds(_chrono);
-        _currentCoroutine = null;
-        _people.SetDestination(_targetPs);
-        _people.isStopped = false;
     }
 
     /// <summary>
-    /// la refaaire avec les bonnes variables quand on aura la classe horloge
+    /// fait mourir par l'age
     /// </summary>
-    private void DeadOrAlive()
+    private void DeadOrAlive() 
     {
         if(_timeLife >= 65)
         {
