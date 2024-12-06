@@ -18,6 +18,9 @@ public class spawnBuilding : MonoBehaviour
     private GameObject _museum = null;
     [SerializeField]
     private GameObject _preview = null;
+    [SerializeField]
+    private GameObject _underConstruction = null;
+    
 
     [SerializeField]
     private GameObject _buildParent = null;
@@ -37,6 +40,7 @@ public class spawnBuilding : MonoBehaviour
 
     private void Update()
     {
+
         if (_buildMode)
         {
             SpawnAtMousePos();
@@ -124,8 +128,11 @@ public class spawnBuilding : MonoBehaviour
             {
                 if (hit.collider.tag == "buildingZone" && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    GameObject newBuild = Instantiate(_buildSelected, hit.point, Quaternion.identity);
+                    GameObject newBuild = Instantiate(_underConstruction, hit.point, Quaternion.identity);
                     newBuild.transform.parent = _buildParent.transform;
+                    newBuild.GetComponent<underConstructionBuildManager>().buildObjective = _buildSelected;
+                    newBuild.GetComponent<underConstructionBuildManager>().buildParent = _buildParent;
+                    newBuild.GetComponent<underConstructionBuildManager>().parent = gameObject;
                     buildList.Add(newBuild);
                 }
             }
