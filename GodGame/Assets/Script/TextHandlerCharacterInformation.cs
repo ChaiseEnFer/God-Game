@@ -22,10 +22,10 @@ public class TextHandlerCharacterInformation : MonoBehaviour
 
     private void UpdateText()
     {
-        _textName.text = GameManager.Instance.selectedCharacter.GetComponent<PeopleProperties>().entityName;
-        _textJob.text = GameManager.Instance.selectedCharacter.GetComponent<PeopleProperties>().jobName;
+        _textName.text = GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().EntityName;
+        _textJob.text = GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().JobName;
 
-        if (GameManager.Instance.selectedCharacter.GetComponent<PeopleProperties>().isTired)
+        if (GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().IsTired)
         {
             _textCharacterTireness.text = "Tired";
         }
