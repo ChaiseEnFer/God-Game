@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-
 public class spawnBuilding : MonoBehaviour
 {
     [SerializeField] 
