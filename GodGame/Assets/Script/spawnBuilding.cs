@@ -93,7 +93,7 @@ public class spawnBuilding : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider.tag != "build")
+            if (hit.collider.tag == "buildingZone")
             {
                 if (_previewSave != null)
                 {
@@ -122,7 +122,7 @@ public class spawnBuilding : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.collider.tag != "build" && !EventSystem.current.IsPointerOverGameObject())
+                if (hit.collider.tag == "buildingZone" && !EventSystem.current.IsPointerOverGameObject())
                 {
                     GameObject newBuild = Instantiate(_buildSelected, hit.point, Quaternion.identity);
                     newBuild.transform.parent = _buildParent.transform;
