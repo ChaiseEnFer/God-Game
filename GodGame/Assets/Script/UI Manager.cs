@@ -19,9 +19,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private bool isDisplayed = false; // vérifie l'etat d'activité du panel schooldisplay
-    private bool isPaused = false;
-    private bool isAccelerated = false;
+    private bool _isDisplayed = false; // vérifie l'etat d'activité du panel schooldisplay
+    private bool _isPaused = false;
+    private bool _isAccelerated = false;
 
     public GameObject SchoolPanel;
 
@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void DisplaySchoolPanel()
     {
-        isDisplayed = true;
+        _isDisplayed = true;
         SchoolPanel.SetActive(true);
     }
 
@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void HideSchoolPanel()
     {
-        isDisplayed = false;
+        _isDisplayed = false;
         SchoolPanel.SetActive(false);
     }
 
@@ -77,14 +77,14 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
-        if (!isPaused)
+        if (!_isPaused)
         {
-            isPaused = true;
+            _isPaused = true;
             Time.timeScale = 0.01f;
         }
         else
         {
-            isPaused = false;
+            _isPaused = false;
             Time.timeScale = 1;
         }
     }
@@ -94,14 +94,14 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void AccelerateGame()
     {
-        if (!isAccelerated)
+        if (!_isAccelerated)
         {
-            isAccelerated = true;
+            _isAccelerated = true;
             Time.timeScale = 2f;
         }
         else
         {
-            isAccelerated = false;
+            _isAccelerated = false;
             Time.timeScale = 1;
         }
     }

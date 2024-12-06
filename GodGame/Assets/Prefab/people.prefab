@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4667337000718433698}
   - component: {fileID: 2760313575652862680}
   - component: {fileID: 7845493991000710628}
+  - component: {fileID: -2009266367800093188}
   m_Layer: 0
   m_Name: people
   m_TagString: Untagged
@@ -125,3 +126,19 @@ MonoBehaviour:
   _radius: 10
   _chrono: 0.5
   _timeLife: 0
+--- !u!114 &-2009266367800093188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3137331412485113873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cb084a9c5e14f4092cefee47d9fb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityName: 
+  jobName: 
+  job: 0
+  isTired: 0
