@@ -8,7 +8,7 @@ public class Population : MonoBehaviour
     private NavMeshAgent _people;
 
     [SerializeField]
-    private GameObject _positionPeople;
+    private GameObject _peopleLife;
 
     [SerializeField]
     private float _seuil = 1.05f;
@@ -18,6 +18,9 @@ public class Population : MonoBehaviour
 
     [SerializeField]
     private float _chrono = 0.5f;
+
+    [SerializeField]
+    private int _timeLife = ;
 
     private bool _isStartTimer = false;
     private int _posX = 0;
@@ -80,5 +83,16 @@ public class Population : MonoBehaviour
         _currentCoroutine = null;
         _people.SetDestination(_targetPs);
         _people.isStopped = false;
+    }
+
+    /// <summary>
+    /// la refaaire avec les bonnes variables quand on aura la classe horloge
+    /// </summary>
+    private void DeadOrAlive()
+    {
+        if(_timeLife >= 65)
+        {
+            Destroy(_people);
+        }
     }
 }
