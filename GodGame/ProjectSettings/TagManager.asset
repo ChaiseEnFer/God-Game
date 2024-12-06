@@ -6,6 +6,10 @@ TagManager:
   tags:
   - build
   - buildingZone
+  - TriggerUp
+  - TriggerRight
+  - TriggerDown
+  - TriggerLeft
   layers:
   - Default
   - TransparentFX
