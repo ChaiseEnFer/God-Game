@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Cette méthode vérifie pour chaque people fatigué, s'il y a un lit de disponible et lui permet de se reposer
     /// </summary>
-    private void CheckForHouses()
+    public void CheckForHouses()
     {
         List<GameObject> _availableHouses = new();
         foreach (GameObject people in AllPeople)
@@ -65,8 +66,23 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Cette méthode vérifie que personne ne manque de nourriture et sinon les tuent
     /// </summary>
-    private void CheckIfEnoughFood()
+    public void CheckIfEnoughFood()
     {
+        if (FoodQuantity > AllPeople.Count)
+        {
+            FoodQuantity -= AllPeople.Count;
+        }
+        else
+        {
+            for (int i = 0; i < FoodQuantity; i++)
+            {
+                int randomIndex = Random.Range(0, AllPeople.Count);
 
+                GameObject peopleToDestroy = AllPeople[randomIndex];
+                AllPeople.Remove(peopleToDestroy);
+                Destroy(peopleToDestroy);
+                FoodQuantity = 0;
+            }
+        }
     }
 }
