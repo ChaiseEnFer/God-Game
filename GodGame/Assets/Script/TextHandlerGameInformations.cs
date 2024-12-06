@@ -21,8 +21,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void UpdateText()
     {
-        //_textTimer.text = $"{GameManager.Instance.selectedCharacter.GetComponent<Clock>().Hour}" + " : " + $"{GameManager.Instance.selectedCharacter.GetComponent<Clock>().Minute}";
-        //_textEntitiesNumber.text = GameManager.Instance.selectedCharacter.GetComponent<PeopleProperties>().EntitiesNumber;
-        //_textFoodQuantity.text = GameManager.Instance.selectedCharacter.GetComponent<PeopleProperties>().FoodQuantity;
+        _textTimer.text = $"{GameManager.Instance.SelectedCharacter.GetComponent<Clock>().Hour}" + " : " + $"{GameManager.Instance.SelectedCharacter.GetComponent<Clock>().Minute}";
+        _textEntitiesNumber.text = GameManager.Instance.EntitiesNumber.ToString(); ;
+        _textFoodQuantity.text = GameManager.Instance.FoodQuantity.ToString(); ;
     }
 }
