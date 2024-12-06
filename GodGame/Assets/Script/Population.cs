@@ -70,7 +70,7 @@ public class Population : MonoBehaviour
     /// </summary>
     private void Deplacement()
     {
-        switch (_propertiesScript.job) //terminer les jobs quand map faite et navmeshée
+        switch (_propertiesScript.Job) //terminer les jobs quand map faite et navmeshée
         {
             case 0:
                 if (_people.remainingDistance > _seuil)

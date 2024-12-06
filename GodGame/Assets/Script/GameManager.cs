@@ -54,6 +54,8 @@ public class GameManager : MonoBehaviour
                 foreach (GameObject house in _availableHouses)
                 {
                     people.GetComponent<PeopleProperties>().IsTired = false;
+                    people.GetComponent<PeopleProperties>().Tireness = 100;
+                    _availableHouses.Remove(house);
                 }
             }
         }
