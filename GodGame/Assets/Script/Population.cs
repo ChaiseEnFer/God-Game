@@ -24,7 +24,7 @@ public class Population : MonoBehaviour
 
     private PeopleProperties _propertiesScript;
 
-    private Vector3 _targetPs = Vector3.zero;
+    public Vector3 TargetPs = Vector3.zero;
 
     private Coroutine _currentCoroutine = null;
 
@@ -32,19 +32,19 @@ public class Population : MonoBehaviour
     {
         yield return new WaitForSeconds(_chrono);
         _currentCoroutine = null;
-        _people.SetDestination(_targetPs);
+        _people.SetDestination(TargetPs);
         _people.isStopped = false;
     }
 
     private void Start()
     {
         _propertiesScript = gameObject.GetComponent<PeopleProperties>();
-        Deplacement();
+        Move();
     }
 
     private void Update()
     {
-        Deplacement();
+        Move();
     }
 
     /// <summary>
@@ -68,26 +68,39 @@ public class Population : MonoBehaviour
     /// <summary>
     /// Fonction de déplacement automatique des peoples
     /// </summary>
-    private void Deplacement()
+    private void Move()
     {
-        switch (_propertiesScript.Job) //terminer les jobs quand map faite et navmeshée
+        if (GameManager.Instance.IsDayRunning)
         {
-            case 0:
-                if (_people.remainingDistance > _seuil)
-                {
-                    _currentCoroutine ??= StartCoroutine(WaitBeforeMove());
-                    return;
-                }
-                _targetPs = RandomNavmeshLocation(_radius);
+            switch (_propertiesScript.Job) //terminer les jobs quand map faite et navmeshée
+            {
+                case 0:
+                    RandomMoving();
+                    break;
 
-                _people.isStopped = true;
-                _people.ResetPath();
-
-                _currentCoroutine ??= StartCoroutine(WaitBeforeMove());
-                break;
-
-            default:
-                break;
+                default:
+                    break;
+            }
         }
+        else
+        {
+            _people.SetDestination(TargetPs);
+            StopAllCoroutines();
+        }
+    }
+
+    private void RandomMoving()
+    {
+        if (_people.remainingDistance > _seuil)
+        {
+            _currentCoroutine ??= StartCoroutine(WaitBeforeMove());
+            return;
+        }
+        TargetPs = RandomNavmeshLocation(_radius);
+
+        _people.isStopped = true;
+        _people.ResetPath();
+
+        _currentCoroutine ??= StartCoroutine(WaitBeforeMove());
     }
 }

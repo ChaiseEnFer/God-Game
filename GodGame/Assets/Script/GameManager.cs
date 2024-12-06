@@ -32,18 +32,11 @@ public class GameManager : MonoBehaviour
     public GameObject SelectedCharacter;
     public int EntitiesNumber = 0;
     public int FoodQuantity;
-    
+    public bool IsDayRunning = false;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Cette méthode vérifie pour chaque people fatigué, s'il y a un lit de disponible et lui permet de se reposer
+    /// </summary>
     private void CheckForHouses()
     {
         List<GameObject> _availableHouses = new();
@@ -51,13 +44,29 @@ public class GameManager : MonoBehaviour
         {
             if (people.GetComponent<PeopleProperties>().IsTired )
             {
-                foreach (GameObject house in _availableHouses)
+                if (_availableHouses.Count == 0)
                 {
-                    people.GetComponent<PeopleProperties>().IsTired = false;
-                    people.GetComponent<PeopleProperties>().Tireness = 100;
-                    _availableHouses.Remove(house);
+                    return;
+                }
+                else
+                {
+                    foreach (GameObject house in _availableHouses)
+                    {
+                        people.GetComponent<PeopleProperties>().IsTired = false;
+                        people.GetComponent<PeopleProperties>().Tireness = 100;
+                        people.GetComponent<Population>().TargetPs = house.transform.position;
+                        _availableHouses.Remove(house);
+                    }
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Cette méthode vérifie que personne ne manque de nourriture et sinon les tuent
+    /// </summary>
+    private void CheckIfEnoughFood()
+    {
+
     }
 }
