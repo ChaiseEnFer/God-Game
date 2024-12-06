@@ -90,15 +90,4 @@ public class Population : MonoBehaviour
                 break;
         }
     }
-
-    /// <summary>
-    /// fait mourir par l'age
-    /// </summary>
-    private void DeadOrAlive() 
-    {
-        if(_timeLife >= 65)
-        {
-            Destroy(_people);
-        }
-    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,14 +20,19 @@ public class GameManager : MonoBehaviour
     }
 
     //Listes contenant les peoples selon leur métier
-    public List<GameObject> wanderers = new();
-    public List<GameObject> foodHarvesters = new();
-    public List<GameObject> timbers = new();
-    public List<GameObject> miners = new();
-    public List<GameObject> masons = new();
+    public List<GameObject> AllPeople = new();
+
+    public List<GameObject> Wanderers = new();
+    public List<GameObject> FoodHarvesters = new();
+    public List<GameObject> Timbers = new();
+    public List<GameObject> Miners = new();
+    public List<GameObject> Masons = new();
 
     //variables
-    public GameObject selectedCharacter;
+    public GameObject SelectedCharacter;
+    public int EntitiesNumber = 0;
+    public int FoodQuantity;
+    
 
     void Start()
     {
@@ -38,5 +44,18 @@ public class GameManager : MonoBehaviour
         
     }
 
-
+    private void CheckForHouses()
+    {
+        List<GameObject> _availableHouses = new();
+        foreach (GameObject people in AllPeople)
+        {
+            if (people.GetComponent<PeopleProperties>().IsTired )
+            {
+                foreach (GameObject house in _availableHouses)
+                {
+                    people.GetComponent<PeopleProperties>().IsTired = false;
+                }
+            }
+        }
+    }
 }

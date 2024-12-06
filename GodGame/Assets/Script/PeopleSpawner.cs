@@ -30,13 +30,13 @@ public class PeopleSpawner : MonoBehaviour
     private void Spawn()
     {
         _peopleInstantiated = Instantiate(_people);
-
+        GameManager.Instance.EntitiesNumber++;
         _propertiesScript = _peopleInstantiated.GetComponent<PeopleProperties>();
 
-        GameManager.Instance.wanderers.Add(_peopleInstantiated);
+        GameManager.Instance.Wanderers.Add(_peopleInstantiated);
         _propertiesScript.name = "John Doe";
-        _propertiesScript.job = 0;
-        _propertiesScript.jobName = "Wanderer";
+        _propertiesScript.Job = 0;
+        _propertiesScript.JobName = "Wanderer";
 
         StartCoroutine(Spawner());
     }
