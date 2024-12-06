@@ -9,7 +9,9 @@ public class PeopleProperties : MonoBehaviour
     public int Job;
     public bool IsTired = false;
     public int Tireness = 100;
-    public int Age; 
+    public int Age;
+
+
 
     /// <summary>
     /// Cette fonction sera appelée pour vérifier si l'unité doit se reposer
@@ -37,13 +39,13 @@ public class PeopleProperties : MonoBehaviour
     /// </summary>
     public void CheckForAge()
     {
-        if (Age >= 65)
+        if (Age >= 7)
         {
             Death();
         }
     }
 
-    public void Death()
+    private void Death()
     {
         Destroy(gameObject);
     }
