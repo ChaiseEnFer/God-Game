@@ -14,6 +14,9 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _textFoodQuantity;
 
+    [SerializeField]
+    private TextMeshProUGUI _textDayNumber;
+
     private void Update()
     {
         UpdateText();
@@ -21,7 +24,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void UpdateText()
     {
-        _textTimer.text = $"{GameManager.Instance.SelectedCharacter.GetComponent<Clock>().Hour}" + " : " + $"{GameManager.Instance.SelectedCharacter.GetComponent<Clock>().Minute}";
+        _textTimer.text = GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualHour.ToString() + " : " + GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualMinute.ToString();
+        _textDayNumber.text = $"Jours n°{GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualDay.ToString()}";
         _textEntitiesNumber.text = GameManager.Instance.EntitiesNumber.ToString(); ;
         _textFoodQuantity.text = GameManager.Instance.FoodQuantity.ToString(); ;
     }

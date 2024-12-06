@@ -14,6 +14,9 @@ public class TextHandlerCharacterInformation : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _textCharacterTireness;
 
+    [SerializeField]
+    private TextMeshProUGUI _textCharacterAge;
+
 
     private void Update()
     {
@@ -33,5 +36,7 @@ public class TextHandlerCharacterInformation : MonoBehaviour
         {
             _textCharacterTireness.text = "Not tired";
         }
+
+        _textCharacterAge.text = GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().Age.ToString();
     }
 }

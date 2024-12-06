@@ -27,14 +27,14 @@ public class TextHandlerJobsInformartion : MonoBehaviour
 
     private void UpdateText()
     {
-        _textWanderer.text = GameManager.Instance.Wanderers.Count.ToString();
+        _textWanderer.text = "Wanderers" + ":" + GameManager.Instance.Wanderers.Count.ToString();
 
-        _textFoodHarvester.text = GameManager.Instance.FoodHarvesters.Count.ToString();
+        _textFoodHarvester.text = "FoodHarvesters" + ":" + GameManager.Instance.FoodHarvesters.Count.ToString();
         
-        _textTimber.text = GameManager.Instance.Timbers.Count.ToString();
+        _textTimber.text = "Timbers" + ":" + GameManager.Instance.Timbers.Count.ToString();
         
-        _textMiner.text = GameManager.Instance.Miners.Count.ToString();
+        _textMiner.text = "Miners" + ":" + GameManager.Instance.Miners.Count.ToString();
         
-        _textMason.text = GameManager.Instance.Masons.Count.ToString();
+        _textMason.text = "Masons" + ":" + GameManager.Instance.Masons.Count.ToString();
     }
 }
