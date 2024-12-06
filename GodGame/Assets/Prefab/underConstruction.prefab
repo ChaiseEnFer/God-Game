@@ -118,3 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7571a812f4fd8d54ba313e2382945390, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  constructionTime: 1
+  buildObjective: {fileID: 0}
+  buildParent: {fileID: 0}
+  parent: {fileID: 0}
+  state: 

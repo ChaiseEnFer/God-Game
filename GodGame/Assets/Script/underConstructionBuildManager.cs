@@ -6,6 +6,9 @@ using UnityEngine.InputSystem.HID;
 
 public class underConstructionBuildManager : MonoBehaviour
 {
+    [SerializeField]
+    private float constructionTime;
+
     public GameObject buildObjective;
     public GameObject buildParent;
     public GameObject parent;
@@ -27,7 +30,7 @@ public class underConstructionBuildManager : MonoBehaviour
 
     IEnumerator Construction()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(constructionTime);
         GameObject newBuild = Instantiate(buildObjective,transform.position, Quaternion.identity);
         newBuild.transform.parent = buildParent.transform;
         parent.GetComponent<spawnBuilding>().buildList.Add(newBuild);
