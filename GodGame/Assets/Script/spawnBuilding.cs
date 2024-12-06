@@ -27,6 +27,8 @@ public class spawnBuilding : MonoBehaviour
     private Camera _cam = null;
     private bool _buildMode = false;
 
+    public List<GameObject> buildList = new List<GameObject>();
+
     private void Start()
     {
         _cam = Camera.main;
@@ -38,7 +40,6 @@ public class spawnBuilding : MonoBehaviour
         if (_buildMode)
         {
             SpawnAtMousePos();
-
             BuildPreviewUpdate();
         }
     }
@@ -125,6 +126,7 @@ public class spawnBuilding : MonoBehaviour
                 {
                     GameObject newBuild = Instantiate(_buildSelected, hit.point, Quaternion.identity);
                     newBuild.transform.parent = _buildParent.transform;
+                    buildList.Add(newBuild);
                 }
             }
         }
