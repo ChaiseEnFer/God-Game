@@ -10,9 +10,20 @@ public class TopDownCameraManager : MonoBehaviour
     private float _cameraSpeed = 0.0f;
     [SerializeField]
     private float _cameraZoomSpeed = 0.0f;
+    [SerializeField]
+    private float limitCamUp = 0.0f;
+    [SerializeField]
+    private float limitCamRight = 0.0f;
+    [SerializeField]
+    private float limitCamDown = 0.0f;
+    [SerializeField]
+    private float limitCamLeft = 0.0f;
+    [SerializeField]
+    private float limitCamZoomUp = 0.0f;
+    [SerializeField]
+    private float limitCamZoomDown = 0.0f;
 
     public InputAction cameraControls;
-    public InputAction cameraZoom;
     private Vector2 _cameraMove = Vector2.zero;
     private Vector2 _cameraMoveWithBorder = Vector2.zero;
     private float _cameraZoom = 0;
@@ -25,8 +36,6 @@ public class TopDownCameraManager : MonoBehaviour
     {
         cameraControls.Disable();
     }
-
-
 
     void Update()
     {
@@ -51,11 +60,17 @@ public class TopDownCameraManager : MonoBehaviour
         _cameraZoom = Mouse.current.scroll.ReadValue().normalized.y * Time.deltaTime * _cameraZoomSpeed;
         if (_cameraMove != Vector2.zero)
         {
-            transform.position = new Vector3(transform.position.x + _cameraMove.x, transform.position.y + _cameraZoom, transform.position.z + _cameraMove.y);
+            float x = Mathf.Clamp(transform.position.x + _cameraMove.x,limitCamLeft,limitCamRight);
+            float y = Mathf.Clamp(transform.position.y + _cameraZoom, limitCamZoomDown, limitCamZoomUp);
+            float z = Mathf.Clamp(transform.position.z + _cameraMove.y, limitCamUp, limitCamDown);
+            transform.position = new Vector3(x,y,z);
         }
         else
         {
-            transform.position = new Vector3(transform.position.x + _cameraMoveWithBorder.x, transform.position.y + _cameraZoom, transform.position.z + _cameraMoveWithBorder.y);
+            float x = Mathf.Clamp(transform.position.x + _cameraMoveWithBorder.x, limitCamLeft, limitCamRight);
+            float y = Mathf.Clamp(transform.position.y + _cameraZoom, limitCamZoomDown, limitCamZoomUp);
+            float z = Mathf.Clamp(transform.position.z + _cameraMoveWithBorder.y, limitCamUp, limitCamDown);
+            transform.position = new Vector3(x, y, z);
             _cameraMoveWithBorder = Vector2.zero;
         }
 
