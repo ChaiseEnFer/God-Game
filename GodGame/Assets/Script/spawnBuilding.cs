@@ -33,6 +33,7 @@ public class spawnBuilding : MonoBehaviour
     private bool _buildMode = false;
 
     public List<GameObject> buildList = new List<GameObject>();
+    public List<GameObject> houseList = new List<GameObject>();
 
     private void Start()
     {
