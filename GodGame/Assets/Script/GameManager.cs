@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
+    private spawnBuilding spawnBuildingScript;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -97,10 +97,17 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void AddHappiness() // A rédiger une fois qu'on aura merge le taf de victor
     {
-        /*foreach (GameObject house in TerrainManager.Instance.AllHouse)
+        foreach (GameObject build in spawnBuildingScript.buildList)
         {
-            ActualHappiness += house.GetComponent<INFODUBATIMENT>().AddedHappiness;
-        }*/
+            if (build.tag == "library")
+            {
+                Debug.Log(build.GetComponent<libraryBuildInfo>().happynessGiven.ToString());
+            }
+            if (build.tag == "museum")
+            {
+                Debug.Log(build.GetComponent<museumBuildInfo>().happynessGiven.ToString());
+            }
+        }
     }
 
     //Conditions de fin de partie
