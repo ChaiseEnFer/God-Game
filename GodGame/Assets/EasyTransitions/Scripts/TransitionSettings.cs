@@ -4,13 +4,13 @@ using UnityEngine;
 namespace EasyTransition
 {
 
-    [CreateAssetMenu(fileName = "TransitionSettings", menuName = "Florian Butz/New SceneLoader Settings", order = 0)]
+    [CreateAssetMenu(fileName = "TransitionSettings", menuName = "Florian Butz/New MainMenuHandler Settings", order = 0)]
     public class TransitionSettings : ScriptableObject
     {
         [HideInInspector]   public Material multiplyColorMaterial;
         [HideInInspector]   public Material addColorMaterial;
 
-        [Header("SceneLoader Settings")]
+        [Header("MainMenuHandler Settings")]
 
         [Tooltip("The resolution of the canvas the transition was made in. For some transitions this might change.")]
         public Vector2 refrenceResolution = new Vector2(1920, 1080);
@@ -48,7 +48,7 @@ namespace EasyTransition
         [Tooltip("Time after scene load within the transition gets destroyed.")]
         public float destroyTime = 3f;
 
-        [Header("SceneLoader Prefabs")]
+        [Header("MainMenuHandler Prefabs")]
         [Space(10)]
         public GameObject transitionIn;
         public GameObject transitionOut;

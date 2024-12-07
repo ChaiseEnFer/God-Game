@@ -173,10 +173,10 @@ namespace EasyTransition
         {
             while (this.gameObject.activeInHierarchy)
             {
-                //Check for multiple instances of the SceneLoader Manager component
+                //Check for multiple instances of the MainMenuHandler Manager component
                 var managerCount = GameObject.FindObjectsOfType<TransitionManager>(true).Length;
                 if (managerCount > 1)
-                    Debug.LogError($"There are {managerCount.ToString()} SceneLoader Managers in your scene. Please ensure there is only one SceneLoader Manager in your scene or overlapping transitions may occur.");
+                    Debug.LogError($"There are {managerCount.ToString()} MainMenuHandler Managers in your scene. Please ensure there is only one MainMenuHandler Manager in your scene or overlapping transitions may occur.");
             
                 yield return new WaitForSecondsRealtime(1f);
             }
