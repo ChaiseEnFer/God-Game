@@ -34,6 +34,10 @@ public class underConstructionBuildManager : MonoBehaviour
         GameObject newBuild = Instantiate(buildObjective,transform.position, Quaternion.identity);
         newBuild.transform.parent = buildParent.transform;
         parent.GetComponent<spawnBuilding>().buildList.Add(newBuild);
+        if (newBuild.tag == "house")
+        {
+            parent.GetComponent<spawnBuilding>().houseList.Add(newBuild);
+        }
         parent.GetComponent<spawnBuilding>().buildList.Remove(gameObject);
         Destroy(gameObject);
 

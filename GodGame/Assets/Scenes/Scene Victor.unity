@@ -1326,6 +1326,7 @@ MonoBehaviour:
   _buildParent: {fileID: 1668932805}
   _cam: {fileID: 2009091194}
   buildList: []
+  houseList: []
 --- !u!1 &806294874
 GameObject:
   m_ObjectHideFlags: 0

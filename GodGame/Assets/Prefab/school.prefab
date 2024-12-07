@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 783941822426055487}
   - component: {fileID: -2183688531420848650}
   m_Layer: 0
-  m_Name: School
-  m_TagString: build
+  m_Name: school
+  m_TagString: school
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,3 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0791c77f13253545bc5c6930ebf0cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  woodPrice: 0
+  stonePrice: 0
+  maxPeopleIn: 0
+  currentPeopleIn: 0

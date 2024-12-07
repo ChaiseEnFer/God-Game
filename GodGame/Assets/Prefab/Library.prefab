@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4349568577228135124}
   m_Layer: 0
   m_Name: Library
-  m_TagString: build
+  m_TagString: library
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,3 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dee0b9a396d0374ab47e25592317d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  woodPrice: 0
+  stonePrice: 0
+  happynessGiven: 0
