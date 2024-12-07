@@ -25,16 +25,18 @@ public class spawnBuilding : MonoBehaviour
     [SerializeField]
     private GameObject _buildParent = null;
 
+    [SerializeField]
+    private Camera _cam = null;
+
     private GameObject _previewSave = null;
     private GameObject _buildSelected = null;
-    private Camera _cam = null;
     private bool _buildMode = false;
 
     public List<GameObject> buildList = new List<GameObject>();
+    public List<GameObject> houseList = new List<GameObject>();
 
     private void Start()
     {
-        _cam = Camera.main;
         _buildSelected = _house;
     }
 

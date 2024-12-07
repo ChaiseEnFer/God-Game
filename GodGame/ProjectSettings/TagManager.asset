@@ -4,8 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - build
   - buildingZone
+  - farm
+  - house
+  - library
+  - museum
+  - school
   layers:
   - Default
   - TransparentFX

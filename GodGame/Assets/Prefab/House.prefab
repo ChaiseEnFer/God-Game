@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3696358160176785156}
   m_Layer: 0
   m_Name: House
-  m_TagString: build
+  m_TagString: house
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,3 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c7d32e71004274c8724d8a1af1fed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  woodPrice: 0
+  stonePrice: 0
+  maxPeopleIn: 0
+  currentPeopleIn: 0
