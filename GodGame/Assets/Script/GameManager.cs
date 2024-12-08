@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CheckForHouses()
     {
-        List<GameObject> _availableHouses = new();
+        List<GameObject> _availableHouses = spawnBuildingScript.houseList;
         foreach (GameObject people in AllPeople)
         {
             if (people.GetComponent<PeopleProperties>().IsTired )

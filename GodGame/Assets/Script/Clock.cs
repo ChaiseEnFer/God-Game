@@ -62,6 +62,7 @@ public class Clock : MonoBehaviour
         {
             GameManager.Instance.CheckIfEnoughFood();
             GameManager.Instance.CheckForHouses();
+            GameManager.Instance.AddHappiness();
 
             foreach (GameObject people in GameManager.Instance.AllPeople)
             {
