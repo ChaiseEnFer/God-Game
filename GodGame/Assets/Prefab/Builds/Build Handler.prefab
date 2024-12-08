@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1541184107239854671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5365294601804150633}
+  - component: {fileID: 693633572783743838}
+  m_Layer: 0
+  m_Name: Build Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5365294601804150633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541184107239854671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &693633572783743838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541184107239854671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69878af15847c9d419f723693a059b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _house: {fileID: 3814532976876475357, guid: 45ac21735a4572e42b1f3a77c09aeb9c, type: 3}
+  _school: {fileID: 3814532976876475357, guid: 1b442f79ccabb824a8d9bca536ae4864, type: 3}
+  _farm: {fileID: 3814532976876475357, guid: fb23cd109d7825343a83556210e3c982, type: 3}
+  _library: {fileID: 3814532976876475357, guid: c2e3168d471680d4cb90002dffff8f29, type: 3}
+  _museum: {fileID: 3814532976876475357, guid: 55949b5beaf43ac4388ca092af5f88b2, type: 3}
+  _preview: {fileID: 3814532976876475357, guid: 76d748b0f6e54f646b737358cf54e99c, type: 3}
+  _underConstruction: {fileID: 3814532976876475357, guid: b257352a851db3c4ab2e2d634c0c2800, type: 3}
+  _buildParent: {fileID: 0}
+  _cam: {fileID: 0}
+  buildList: []
+  houseList: []

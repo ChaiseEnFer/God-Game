@@ -48,6 +48,22 @@ public class spawnBuilding : MonoBehaviour
             SpawnAtMousePos();
             BuildPreviewUpdate();
         }
+
+        else
+        {
+            SelectPeople();
+        }
+    }
+
+    public void SelectPeople()
+    {
+        Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            _previewSave = Instantiate(_preview, hit.point, Quaternion.identity);
+            _previewSave.transform.parent = transform;
+        }
     }
 
     public void ChangeBuildToHouse()
