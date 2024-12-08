@@ -19,13 +19,13 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void Update()
     {
-        UpdateText();
+        //UpdateText();
     }
 
     private void UpdateText()
     {
         _textTimer.text = GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualHour.ToString() + " : " + GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualMinute.ToString();
-        _textDayNumber.text = $"Jours n°{GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualDay.ToString()}";
+        _textDayNumber.text = $"Jours nï¿½{GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualDay.ToString()}";
         _textEntitiesNumber.text = GameManager.Instance.EntitiesNumber.ToString(); ;
         _textFoodQuantity.text = GameManager.Instance.FoodQuantity.ToString(); ;
     }

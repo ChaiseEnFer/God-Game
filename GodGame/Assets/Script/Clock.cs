@@ -44,6 +44,10 @@ public class Clock : MonoBehaviour
             if (ActualHour == _dayStartHour)
             {
                 GameManager.Instance.IsDayRunning = true;
+                foreach (GameObject people in GameManager.Instance.AllPeople)
+                {
+                    people.GetComponent<Population>().HasAHouse = false;
+                }
                 _isActivated=true;
             }
 

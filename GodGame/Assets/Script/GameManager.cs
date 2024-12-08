@@ -7,7 +7,10 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    [SerializeField]
     private spawnBuilding spawnBuildingScript;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -60,6 +63,7 @@ public class GameManager : MonoBehaviour
                     foreach (GameObject house in _availableHouses)
                     {
                         people.GetComponent<PeopleProperties>().IsTired = false;
+                        people.GetComponent<Population>().HasAHouse = true;
                         people.GetComponent<PeopleProperties>().Tireness = 100;
                         people.GetComponent<Population>().TargetPs = house.transform.position;
                         _availableHouses.Remove(house);

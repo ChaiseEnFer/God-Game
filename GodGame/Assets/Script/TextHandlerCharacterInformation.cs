@@ -20,7 +20,7 @@ public class TextHandlerCharacterInformation : MonoBehaviour
 
     private void Update()
     {
-        UpdateText();
+        //UpdateText();
     }
 
     private void UpdateText()
