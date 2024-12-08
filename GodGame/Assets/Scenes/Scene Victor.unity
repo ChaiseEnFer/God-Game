@@ -1277,9 +1277,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_XDamping: 0.5
+  m_YDamping: 0.5
+  m_ZDamping: 0.5
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -2772,6 +2772,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraSpeed: 10
+  _cameraZoomSpeed: 200
+  limitCamUp: -10
+  limitCamRight: 10
+  limitCamDown: 10
+  limitCamLeft: -10
+  limitCamZoomUp: 15
+  limitCamZoomDown: 5
   cameraControls:
     m_Name: Camera Controls
     m_Type: 0
@@ -2819,39 +2826,6 @@ MonoBehaviour:
       m_Processors: 
       m_Groups: 
       m_Action: Camera Controls
-      m_Flags: 8
-    m_Flags: 0
-  cameraZoom:
-    m_Name: Camera Zoom
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: ee9317bc-c444-4953-97d2-20e9b39875bc
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 1D Axis
-      m_Id: 09676b60-bb16-470f-bf3c-32149bd16920
-      m_Path: 1DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Camera Zoom
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: 5580dba3-17b3-482d-aa4e-5cf3b5500a64
-      m_Path: <Mouse>/scroll/up
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Camera Zoom
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: 71f3f94e-c903-4a14-99cd-80d739b09fd9
-      m_Path: <Mouse>/scroll/down
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Camera Zoom
       m_Flags: 8
     m_Flags: 0
 --- !u!4 &1668854402

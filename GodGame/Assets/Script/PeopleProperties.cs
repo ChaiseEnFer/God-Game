@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PeopleProperties : MonoBehaviour
 {
-    public string EntityName = "";
-    public string JobName = ""; //sous la pression je fus dans l'obkigation de créer cette variable.
+    public string EntityName;
+    public string JobName; //sous la pression je fus dans l'obkigation de créer cette variable.
     public int Job;
     public bool IsTired = false;
     public int Tireness = 100;
