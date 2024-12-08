@@ -39,19 +39,19 @@ public class TopDownCameraManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.mousePosition.x < Screen.width / 10)
+        if (Input.mousePosition.x < Screen.width / 100)
         {
             _cameraMoveWithBorder.x = -1;
         }
-        if (Input.mousePosition.x > Screen.width * 0.9)
+        if (Input.mousePosition.x > Screen.width * 0.99)
         { 
             _cameraMoveWithBorder.x = 1;
         }
-        if (Input.mousePosition.y < Screen.height / 10)
+        if (Input.mousePosition.y < Screen.height / 100)
         {
             _cameraMoveWithBorder.y = -1;
         }
-        if (Input.mousePosition.y > Screen.height * 0.9)
+        if (Input.mousePosition.y > Screen.height * 0.99)
         {
             _cameraMoveWithBorder.y = 1;
         }
