@@ -57,7 +57,7 @@ public class TopDownCameraManager : MonoBehaviour
         }
         _cameraMoveWithBorder *= Time.deltaTime * _cameraSpeed;
         _cameraMove = cameraControls.ReadValue<Vector2>() * Time.deltaTime * _cameraSpeed;
-        _cameraZoom = Mouse.current.scroll.ReadValue().normalized.y * Time.deltaTime * _cameraZoomSpeed;
+        _cameraZoom = -Mouse.current.scroll.ReadValue().normalized.y * Time.deltaTime * _cameraZoomSpeed;
         if (_cameraMove != Vector2.zero)
         {
             float x = Mathf.Clamp(transform.position.x + _cameraMove.x,limitCamLeft,limitCamRight);

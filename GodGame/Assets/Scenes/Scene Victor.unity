@@ -2772,7 +2772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraSpeed: 10
-  _cameraZoomSpeed: 10
+  _cameraZoomSpeed: 200
   limitCamUp: -10
   limitCamRight: 10
   limitCamDown: 10
