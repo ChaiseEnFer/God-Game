@@ -149,11 +149,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 20445839}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d7d955b64fa6d40805b15de2ad0eeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 926bfad97069ba045bee5a2d4c371e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToChangeScene: 0
-  Transition: {fileID: 11400000, guid: 057babd6f13132c449650d99e3c4e99c, type: 2}
+  Transition: {fileID: 11400000, guid: 2eec88d4ca6df24419aab2fd6b04c543, type: 2}
 --- !u!114 &20445841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 156, y: 17}
+  m_AnchoredPosition: {x: 156, y: 0}
   m_SizeDelta: {x: 312, y: 308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &560875589
@@ -400,7 +400,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 5
   m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0

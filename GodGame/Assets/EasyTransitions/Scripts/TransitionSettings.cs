@@ -31,7 +31,7 @@ namespace EasyTransition
         [Space(10)]
         [Tooltip("Changes the animation speed of the transition. Only works when theres 1 Animator component somewhere on the transition prefab.")]
         [Range(0.5f, 2f)]
-        public float transitionSpeed = 1;
+        public float transitionSpeed = 1f;
 
         [Tooltip("If you change the transition speed value and set autoAdjustTransitionTime it will automatically change the transition times to fit the new speed.")]
         public bool autoAdjustTransitionTime = true;
