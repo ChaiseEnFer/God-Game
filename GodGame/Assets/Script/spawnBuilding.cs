@@ -196,7 +196,7 @@ public class spawnBuilding : MonoBehaviour
 
                         foreach (GameObject mason in GameManager.Instance.Masons)
                         {
-                            if (mason.GetComponent<Population>().CanMove == true)
+                            if (mason.GetComponent<Population>().CanMove == true && !mason.GetComponent<PeopleProperties>().IsTired)
                             {
                                 _availableMasons.Add(mason);
                             }
@@ -245,7 +245,7 @@ public class spawnBuilding : MonoBehaviour
                 _woodNeeded = _buildSelected.GetComponent<farmBuildInfo>().woodPrice;
                 _stoneNeeded = _buildSelected.GetComponent<farmBuildInfo>().stonePrice;
                 break;
-            case "School":
+            case "school":
                 _woodNeeded = _buildSelected.GetComponent<schoolBuildInfo>().woodPrice;
                 _stoneNeeded = _buildSelected.GetComponent<schoolBuildInfo>().stonePrice;
                 break;
@@ -256,6 +256,11 @@ public class spawnBuilding : MonoBehaviour
             case "Library":
                 _woodNeeded = _buildSelected.GetComponent<libraryBuildInfo>().woodPrice;
                 _stoneNeeded = _buildSelected.GetComponent<libraryBuildInfo>().stonePrice;
+                break;
+            default:
+                Debug.Log("CA MARCHE PAS PUTAIN");
+                _woodNeeded = 1000000;
+                _stoneNeeded = 1000000;
                 break;
         }
     }

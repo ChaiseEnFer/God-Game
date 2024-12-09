@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eba6b204ed2bf8c4885b3c8d7dec7cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  woodPrice: 3
+  woodPrice: 5
   stonePrice: 2
   maxPeopleIn: 0
   currentPeopleIn: 0

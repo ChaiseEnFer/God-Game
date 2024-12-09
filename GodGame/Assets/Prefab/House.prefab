@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   woodPrice: 2
-  stonePrice: 0
+  stonePrice: 1
   maxPeopleIn: 0
   currentPeopleIn: 0
 --- !u!208 &6134263176608859984

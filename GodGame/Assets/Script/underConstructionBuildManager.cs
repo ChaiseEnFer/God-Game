@@ -24,8 +24,13 @@ public class underConstructionBuildManager : MonoBehaviour
         if (state == "start construction")
         {
             state = "under construction";
-            StartCoroutine(Construction());
+            
         }
+    }
+
+    public void BuildUntilNight() //Make them Crunch
+    {
+        StartCoroutine(Construction());
     }
 
     IEnumerator Construction()

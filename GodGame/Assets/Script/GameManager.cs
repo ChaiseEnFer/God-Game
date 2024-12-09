@@ -50,11 +50,6 @@ public class GameManager : MonoBehaviour
     /// <param name="job">The new job</param>
     public void SendToSchool(int job)
     {
-        int _lastJob = SelectedCharacter.GetComponent<PeopleProperties>().Job;
-        RemoveAffiliation(_lastJob, SelectedCharacter);
-        SelectedCharacter.GetComponent<PeopleProperties>().Job = job;
-        AddAffiliation(job);
-
         List<GameObject> _allSchools = new();
         foreach (GameObject build in spawnBuildingScript.buildList)
         {
@@ -62,8 +57,19 @@ public class GameManager : MonoBehaviour
             {
                 if (build.GetComponent<schoolBuildInfo>().IsFree == true)
                 {
+                    build.GetComponent<schoolBuildInfo>().CurrentOccupants++;
+
+                    int _lastJob = SelectedCharacter.GetComponent<PeopleProperties>().Job;
+                    RemoveAffiliation(_lastJob, SelectedCharacter);
+                    SelectedCharacter.GetComponent<PeopleProperties>().Job = job;
+                    AddAffiliation(job);
+
                     SelectedCharacter.GetComponent<Population>().TargetPs = build.transform.position;
-                    build.GetComponent<schoolBuildInfo>().IsFree = false;
+
+
+                    if (build.GetComponent<schoolBuildInfo>().CurrentOccupants == build.GetComponent<schoolBuildInfo>().MaxOccupants)
+                        build.GetComponent<schoolBuildInfo>().IsFree = false;
+
                     SelectedCharacter.GetComponent<Population>().CanMove = false;
                     return;
                 }
@@ -190,7 +196,6 @@ public class GameManager : MonoBehaviour
     {
         if (FoodQuantity > AllPeople.Count)
         {
-            Debug.Log("everybody survived");
             FoodQuantity -= AllPeople.Count;
         }
         else

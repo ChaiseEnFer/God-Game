@@ -50,7 +50,9 @@ public class Clock : MonoBehaviour
             {
                 GameManager.Instance.IsDayRunning = false;
                 _isActivated = true;
-                Debug.Log("fin de journée");
+
+                UpdateBuildings();
+
                 GameManager.Instance.MakeThemExhausted();
                 GameManager.Instance.CheckForHouses();
                 GameManager.Instance.CheckIfEnoughFood();
@@ -91,17 +93,28 @@ public class Clock : MonoBehaviour
     {
         foreach (GameObject worker in GameManager.Instance.FoodHarvesters)
         {
-            GameManager.Instance.FoodQuantity++;
+            if (!worker.GetComponent<PeopleProperties>().IsTired)
+                GameManager.Instance.FoodQuantity++;
         }
         foreach (GameObject worker in GameManager.Instance.Timbers)
         {
-            GameManager.Instance.WoodQuantity++;
+            if (!worker.GetComponent<PeopleProperties>().IsTired)
+                GameManager.Instance.WoodQuantity++;
         }
         foreach (GameObject worker in GameManager.Instance.Miners)
         {
-            GameManager.Instance.StoneQuantity++;
+            if (!worker.GetComponent<PeopleProperties>().IsTired)
+                GameManager.Instance.StoneQuantity++;
         }
     }
 
+    private void UpdateBuildings()
+    {
+        GameObject[] prebuild =  GameObject.FindGameObjectsWithTag("UnderConstruction");
 
+        foreach (GameObject build in prebuild)
+        {
+            build.GetComponent<underConstructionBuildManager>().BuildUntilNight();
+        }
+    }
 }

@@ -119,10 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0791c77f13253545bc5c6930ebf0cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  woodPrice: 0
-  stonePrice: 0
-  maxPeopleIn: 0
-  currentPeopleIn: 0
+  woodPrice: 2
+  stonePrice: 3
+  CurrentOccupants: 0
+  MaxOccupants: 3
+  IsFree: 1
 --- !u!208 &-8519325552558581950
 NavMeshObstacle:
   m_ObjectHideFlags: 0
