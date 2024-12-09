@@ -22,7 +22,6 @@ public class PeopleSpawner : MonoBehaviour
     private void Start()
     {
         StartSpawn();
-        StartSpawn();
         StartCoroutine(Spawner());
     }
 

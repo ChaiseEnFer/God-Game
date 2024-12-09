@@ -37,6 +37,8 @@ public class Clock : MonoBehaviour
         if(ActualMinute >= 60)
         {
             ActualHour += 1;
+            if (GameManager.Instance.IsDayRunning)
+                AddRessources();
             ActualMinute = 00.00f;
 
             if (ActualHour == _dayStartHour - 1 || ActualHour == _dayFinishHour - 1)
@@ -82,6 +84,22 @@ public class Clock : MonoBehaviour
         else
         {
             ActualMinute += Time.deltaTime*10;
+        }
+    }
+
+    private void AddRessources()
+    {
+        foreach (GameObject worker in GameManager.Instance.FoodHarvesters)
+        {
+            GameManager.Instance.FoodQuantity++;
+        }
+        foreach (GameObject worker in GameManager.Instance.Timbers)
+        {
+            GameManager.Instance.WoodQuantity++;
+        }
+        foreach (GameObject worker in GameManager.Instance.Miners)
+        {
+            GameManager.Instance.StoneQuantity++;
         }
     }
 
