@@ -20,6 +20,15 @@ public class Population : MonoBehaviour
     private float _chrono = 0.5f;
 
     [SerializeField]
+    private GameObject MineTarget;
+
+    [SerializeField]
+    private GameObject HarvestTarget;
+
+    [SerializeField]
+    private GameObject ForestTarget;
+
+    [SerializeField]
     //private int _timeLife = 0;
 
     private PeopleProperties _propertiesScript;
@@ -41,6 +50,9 @@ public class Population : MonoBehaviour
 
     private void Start()
     {
+        MineTarget = GameObject.FindGameObjectWithTag("MineTarget");
+        ForestTarget = GameObject.FindGameObjectWithTag("ForestTarget");
+        HarvestTarget = GameObject.FindGameObjectWithTag("HarvestTarget");
         _propertiesScript = gameObject.GetComponent<PeopleProperties>();
         Move();
     }
@@ -80,6 +92,25 @@ public class Population : MonoBehaviour
                 switch (_propertiesScript.Job) //terminer les jobs quand map faite et navmeshée
                 {
                     case 0:
+                        RandomMoving();
+                        break;
+
+                    case 1:
+                        TargetPs = new Vector3(HarvestTarget.transform.position.x + Random.Range(-15, 15), HarvestTarget.transform.position.y, HarvestTarget.transform.position.z + Random.Range(-15, 15));
+                        RegularMoving();
+                        break;
+
+                    case 2:
+                        TargetPs = new Vector3(ForestTarget.transform.position.x + Random.Range(-15, 15), ForestTarget.transform.position.y, ForestTarget.transform.position.z + Random.Range(-15, 15));
+                        RegularMoving();
+                        break;
+
+                    case 3:
+                        TargetPs = new Vector3(MineTarget.transform.position.x + Random.Range(-30, 30), MineTarget.transform.position.y, MineTarget.transform.position.z + Random.Range(-30, 30));
+                        RegularMoving();
+                        break;
+
+                    case 4:
                         RandomMoving();
                         break;
 

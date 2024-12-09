@@ -11,7 +11,10 @@ TagManager:
   - museum
   - school
   - People
-  - UnderContruction
+  - UnderConstruction
+  - MineTarget
+  - ForestTarget
+  - HarvestTarget
   layers:
   - Default
   - TransparentFX

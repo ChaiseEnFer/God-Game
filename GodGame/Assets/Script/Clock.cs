@@ -110,11 +110,15 @@ public class Clock : MonoBehaviour
 
     private void UpdateBuildings()
     {
-        GameObject[] prebuild =  GameObject.FindGameObjectsWithTag("UnderConstruction");
-
-        foreach (GameObject build in prebuild)
+        GameObject[] prebuild;
+        if (GameObject.FindGameObjectsWithTag("UnderConstruction") != null)
         {
-            build.GetComponent<underConstructionBuildManager>().BuildUntilNight();
+            prebuild = GameObject.FindGameObjectsWithTag("UnderConstruction");
+
+            foreach (GameObject build in prebuild)
+            {
+                build.GetComponent<underConstructionBuildManager>().BuildUntilNight();
+            }
         }
     }
 }
