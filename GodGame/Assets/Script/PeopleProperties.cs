@@ -51,7 +51,6 @@ public class PeopleProperties : MonoBehaviour
         {
             UIManager.Instance.HidePeopleInfoPanel();
             UIManager.Instance.HideSchoolPanel();
-            UIManager.Instance.HideBuildPanel();
         }
         Destroy(gameObject);
     }

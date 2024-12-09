@@ -32,7 +32,7 @@ public class spawnBuilding : MonoBehaviour
 
     private GameObject _previewSave = null;
     private GameObject _buildSelected = null;
-    private bool _buildMode = false;
+    public bool IsInBuildMode = false;
 
     public List<GameObject> buildList = new List<GameObject>();
     public List<GameObject> houseList = new List<GameObject>();
@@ -44,7 +44,7 @@ public class spawnBuilding : MonoBehaviour
 
     private void Update()
     {
-        if (_buildMode)
+        if (IsInBuildMode)
         {
             SpawnAtMousePos();
             BuildPreviewUpdate();
@@ -67,20 +67,8 @@ public class spawnBuilding : MonoBehaviour
                 if (hit.collider.tag == "People")
                 {
                     GameManager.Instance.SelectedCharacter = hit.collider.gameObject;
-
                     UIManager.Instance.DisplayPeopleInfoPanel();
-
-                    if (hit.collider.gameObject.GetComponent<PeopleProperties>().JobName == "Wanderer")
-                    {
-                        UIManager.Instance.HideBuildPanel();
-                        UIManager.Instance.DisplaySchoolPanel();
-                    }
-                    else if (hit.collider.gameObject.GetComponent<PeopleProperties>().JobName == "Mason")
-                    {
-
-                        UIManager.Instance.HideSchoolPanel();
-                        UIManager.Instance.DisplayBuildPanel();
-                    }
+                    UIManager.Instance.DisplaySchoolPanel();
                 }
             }
         }
@@ -108,7 +96,7 @@ public class spawnBuilding : MonoBehaviour
     }
     public void EnterBuildMode()
     {
-        _buildMode = true;
+        IsInBuildMode = true;
         if (_previewSave == null)
         {
             Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -122,7 +110,7 @@ public class spawnBuilding : MonoBehaviour
     }
     public void ExitBuildMode()
     {
-        _buildMode = false;
+        IsInBuildMode = false;
         if (_previewSave != null)
         {
             Destroy(_previewSave);

@@ -36,11 +36,6 @@ public class UIManager : MonoBehaviour
         SchoolPanel.SetActive(true);
     }
 
-    public void DisplayBuildPanel()
-    {
-        BuildPanel.SetActive(true);
-    }
-
     public void DisplayPeopleInfoPanel()
     {
         PInfoPanel.SetActive(true);
@@ -53,11 +48,6 @@ public class UIManager : MonoBehaviour
     {
         _isDisplayed = false;
         SchoolPanel.SetActive(false);
-    }
-
-    public void HideBuildPanel()
-    {
-        BuildPanel.SetActive(false);
     }
 
     public void HidePeopleInfoPanel()
