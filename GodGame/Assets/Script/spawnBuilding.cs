@@ -20,7 +20,9 @@ public class spawnBuilding : MonoBehaviour
     private GameObject _preview = null;
     [SerializeField]
     private GameObject _underConstruction = null;
-    
+
+    [SerializeField]
+    private LayerMask _LayerM;
 
     [SerializeField]
     private GameObject _buildParent = null;
@@ -42,7 +44,6 @@ public class spawnBuilding : MonoBehaviour
 
     private void Update()
     {
-
         if (_buildMode)
         {
             SpawnAtMousePos();
@@ -57,12 +58,31 @@ public class spawnBuilding : MonoBehaviour
 
     public void SelectPeople()
     {
-        Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            _previewSave = Instantiate(_preview, hit.point, Quaternion.identity);
-            _previewSave.transform.parent = transform;
+            Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.tag == "People")
+                {
+                    GameManager.Instance.SelectedCharacter = hit.collider.gameObject;
+
+                    UIManager.Instance.DisplayPeopleInfoPanel();
+
+                    if (hit.collider.gameObject.GetComponent<PeopleProperties>().JobName == "Wanderer")
+                    {
+                        UIManager.Instance.HideBuildPanel();
+                        UIManager.Instance.DisplaySchoolPanel();
+                    }
+                    else if (hit.collider.gameObject.GetComponent<PeopleProperties>().JobName == "Mason")
+                    {
+
+                        UIManager.Instance.HideSchoolPanel();
+                        UIManager.Instance.DisplayBuildPanel();
+                    }
+                }
+            }
         }
     }
 

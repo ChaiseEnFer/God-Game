@@ -47,6 +47,12 @@ public class PeopleProperties : MonoBehaviour
 
     private void Death()
     {
+        if (GameManager.Instance.SelectedCharacter == this.gameObject)
+        {
+            UIManager.Instance.HidePeopleInfoPanel();
+            UIManager.Instance.HideSchoolPanel();
+            UIManager.Instance.HideBuildPanel();
+        }
         Destroy(gameObject);
     }
 }

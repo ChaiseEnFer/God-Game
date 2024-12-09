@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     public int FoodQuantity;
     public bool IsDayRunning = false;
     public int ActualHappiness;
+    public int WoodQuantity;
+    public int StoneQuantity;
 
     //variables privées
     private int _maxHappiness;

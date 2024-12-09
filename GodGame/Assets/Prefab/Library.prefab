@@ -119,9 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dee0b9a396d0374ab47e25592317d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  woodPrice: 0
-  stonePrice: 0
-  happynessGiven: 0
+  woodPrice: 1
+  stonePrice: 1
+  happynessGiven: 1
 --- !u!208 &1008366208834143918
 NavMeshObstacle:
   m_ObjectHideFlags: 0

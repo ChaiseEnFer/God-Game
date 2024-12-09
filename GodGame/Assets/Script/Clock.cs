@@ -14,11 +14,16 @@ public class Clock : MonoBehaviour
 
     public int ActualHour = 0;
 
-    public int ActualDay = 0;
+    public int ActualDay = 1;
 
     private bool _isDayFinished = false;
 
     private bool _isActivated = false;
+
+    private void Start()
+    {
+        ActualDay = 1;
+    }
     // Update is called once per frame
     void Update()
     {

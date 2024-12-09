@@ -7,5 +7,5 @@ public class museumBuildInfo : MonoBehaviour
     public int woodPrice;
     public int stonePrice;
 
-    public int happynessGiven;
+    public int happynessGiven ;
 }

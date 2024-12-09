@@ -16,17 +16,25 @@ public class NewBehaviourScript : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI _textDayNumber;
+    [SerializeField]
+    private TextMeshProUGUI _textWoodQuantity;
+    [SerializeField]
+    private TextMeshProUGUI _textStoneQuantity;
+
+    public Clock Clock;
 
     private void Update()
     {
-        //UpdateText();
+        UpdateText();
     }
 
     private void UpdateText()
     {
-        _textTimer.text = GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualHour.ToString() + " : " + GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualMinute.ToString();
-        _textDayNumber.text = $"Jours n�{GameManager.Instance.SelectedCharacter.GetComponent<Clock>().ActualDay.ToString()}";
-        _textEntitiesNumber.text = GameManager.Instance.EntitiesNumber.ToString(); ;
-        _textFoodQuantity.text = GameManager.Instance.FoodQuantity.ToString(); ;
+        _textTimer.text = Clock.ActualHour.ToString() + " : " + Mathf.RoundToInt(Clock.ActualMinute).ToString();
+        _textDayNumber.text = "Jour : " + Clock.ActualDay;
+        _textEntitiesNumber.text = "Population : " +GameManager.Instance.EntitiesNumber.ToString(); ;
+        _textFoodQuantity.text = "Food : " +GameManager.Instance.FoodQuantity.ToString();
+        _textWoodQuantity.text = "Wood : " + GameManager.Instance.WoodQuantity.ToString();
+        _textStoneQuantity.text = "Stone : " + GameManager.Instance.StoneQuantity.ToString();
     }
 }

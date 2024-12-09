@@ -24,6 +24,8 @@ public class UIManager : MonoBehaviour
     private bool _isAccelerated = false;
 
     public GameObject SchoolPanel;
+    public GameObject BuildPanel;
+    public GameObject PInfoPanel;
 
     /// <summary>
     /// Fonction servant a afficher le panel montrant le choix des metiers
@@ -34,6 +36,16 @@ public class UIManager : MonoBehaviour
         SchoolPanel.SetActive(true);
     }
 
+    public void DisplayBuildPanel()
+    {
+        BuildPanel.SetActive(true);
+    }
+
+    public void DisplayPeopleInfoPanel()
+    {
+        PInfoPanel.SetActive(true);
+    }
+
     /// <summary>
     /// Fonction servant a cacher le panel montrant le choix des metiers
     /// </summary>
@@ -41,6 +53,16 @@ public class UIManager : MonoBehaviour
     {
         _isDisplayed = false;
         SchoolPanel.SetActive(false);
+    }
+
+    public void HideBuildPanel()
+    {
+        BuildPanel.SetActive(false);
+    }
+
+    public void HidePeopleInfoPanel()
+    {
+        PInfoPanel.SetActive(false);
     }
 
     /// <summary>

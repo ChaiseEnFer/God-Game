@@ -20,13 +20,13 @@ public class TextHandlerCharacterInformation : MonoBehaviour
 
     private void Update()
     {
-        //UpdateText();
+        UpdateText();
     }
 
     private void UpdateText()
     {
-        _textName.text = GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().EntityName;
-        _textJob.text = GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().JobName;
+        _textName.text = "Name : " +GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().EntityName;
+        _textJob.text = "Job : " + GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().JobName;
 
         if (GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().IsTired)
         {
@@ -37,6 +37,6 @@ public class TextHandlerCharacterInformation : MonoBehaviour
             _textCharacterTireness.text = "Not tired";
         }
 
-        _textCharacterAge.text = GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().Age.ToString();
+        _textCharacterAge.text = "Age : " +GameManager.Instance.SelectedCharacter.GetComponent<PeopleProperties>().Age.ToString();
     }
 }
