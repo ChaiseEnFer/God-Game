@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -19,7 +20,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private bool _isDisplayed = false; // vérifie l'etat d'activité du panel schooldisplay
+    [SerializeField]
+    private spawnBuilding buildHandler;
+    [SerializeField]
+    private TopDownCameraManager camScript;
     private bool _isPaused = false;
     private bool _isAccelerated = false;
 
@@ -27,12 +31,14 @@ public class UIManager : MonoBehaviour
     public GameObject BuildPanel;
     public GameObject PInfoPanel;
 
+
+
+
     /// <summary>
     /// Fonction servant a afficher le panel montrant le choix des metiers
     /// </summary>
     public void DisplaySchoolPanel()
     {
-        _isDisplayed = true;
         SchoolPanel.SetActive(true);
     }
 
@@ -46,7 +52,6 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void HideSchoolPanel()
     {
-        _isDisplayed = false;
         SchoolPanel.SetActive(false);
     }
 
@@ -63,25 +68,27 @@ public class UIManager : MonoBehaviour
         switch (job)
         {
             case 0:
-            //GameManager.Instance.selectedCharacter = ListeDuJobEnQuestion(Random.Range(0, ListeDuJobEnQuestion.Count() -1));
+            GameManager.Instance.SelectedCharacter = GameManager.Instance.Wanderers[Random.Range(0, GameManager.Instance.Wanderers.Count -1)];
                 break;
 
             case 1:
-            //GameManager.Instance.selectedCharacter = ListeDuJobEnQuestion(Random.Range(0, ListeDuJobEnQuestion.Count() -1));
+            GameManager.Instance.SelectedCharacter = GameManager.Instance.FoodHarvesters[Random.Range(0, GameManager.Instance.FoodHarvesters.Count -1)];
                 break;
 
             case 2:
-            //GameManager.Instance.selectedCharacter = ListeDuJobEnQuestion(Random.Range(0, ListeDuJobEnQuestion.Count() -1));
+                GameManager.Instance.SelectedCharacter = GameManager.Instance.Timbers[Random.Range(0, GameManager.Instance.Timbers.Count - 1)];
                 break;
 
             case 3:
-            //GameManager.Instance.selectedCharacter = ListeDuJobEnQuestion(Random.Range(0, ListeDuJobEnQuestion.Count() -1));
+            GameManager.Instance.SelectedCharacter = GameManager.Instance.Miners[Random.Range(0, GameManager.Instance.Miners.Count -1)];
                 break;
 
             case 4:
-            //GameManager.Instance.selectedCharacter = ListeDuJobEnQuestion(Random.Range(0, ListeDuJobEnQuestion.Count() -1));
+            GameManager.Instance.SelectedCharacter = GameManager.Instance.Masons[Random.Range(0, GameManager.Instance.Masons.Count -1)];
                 break;
         }
+
+        buildHandler.CheckForDisplay();
     }
 
     /// <summary>
@@ -93,11 +100,13 @@ public class UIManager : MonoBehaviour
         {
             _isPaused = true;
             Time.timeScale = 0.01f;
+            camScript.CameraSpeed *= 100;
         }
         else
         {
             _isPaused = false;
             Time.timeScale = 1;
+            camScript.CameraSpeed /= 100;
         }
     }
 
@@ -109,7 +118,7 @@ public class UIManager : MonoBehaviour
         if (!_isAccelerated)
         {
             _isAccelerated = true;
-            Time.timeScale = 2f;
+            Time.timeScale = 4f;
         }
         else
         {

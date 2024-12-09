@@ -27,7 +27,9 @@ public class Population : MonoBehaviour
     public Vector3 TargetPs = Vector3.zero;
 
     private Coroutine _currentCoroutine = null;
-    public bool HasAHouse;
+
+    public bool CanMove = true;
+    public bool HasAHouse = false;
 
     private IEnumerator WaitBeforeMove()
     {
@@ -71,23 +73,34 @@ public class Population : MonoBehaviour
     /// </summary>
     private void Move()
     {
-        if (GameManager.Instance.IsDayRunning || !HasAHouse)
+        if (CanMove)
         {
-            switch (_propertiesScript.Job) //terminer les jobs quand map faite et navmeshée
+            if (GameManager.Instance.IsDayRunning || !HasAHouse)
             {
-                case 0:
-                    RandomMoving();
-                    break;
+                switch (_propertiesScript.Job) //terminer les jobs quand map faite et navmeshée
+                {
+                    case 0:
+                        RandomMoving();
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                RegularMoving();
             }
         }
         else
         {
-            _people.SetDestination(TargetPs);
-            //StopAllCoroutines();
+            RegularMoving();
         }
+    }
+
+    private void RegularMoving()
+    {
+        _people.SetDestination(TargetPs);
     }
 
     private void RandomMoving()

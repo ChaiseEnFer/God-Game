@@ -31,11 +31,14 @@ public class spawnBuilding : MonoBehaviour
     private Camera _cam = null;
 
     private GameObject _previewSave = null;
-    private GameObject _buildSelected = null;
+    private GameObject _buildSelected;
     public bool IsInBuildMode = false;
 
     public List<GameObject> buildList = new List<GameObject>();
     public List<GameObject> houseList = new List<GameObject>();
+
+    private int _woodNeeded;
+    private int _stoneNeeded;
 
     private void Start()
     {
@@ -56,6 +59,9 @@ public class spawnBuilding : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Allow selection of population by clicking
+    /// </summary>
     public void SelectPeople()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -67,12 +73,30 @@ public class spawnBuilding : MonoBehaviour
                 if (hit.collider.tag == "People")
                 {
                     GameManager.Instance.SelectedCharacter = hit.collider.gameObject;
-                    UIManager.Instance.DisplayPeopleInfoPanel();
-                    UIManager.Instance.DisplaySchoolPanel();
+
+                    CheckForDisplay();
                 }
             }
         }
     }
+
+    public void CheckForDisplay()
+    {
+        foreach (GameObject build in buildList)
+        {
+            if (build.tag == "school")
+            {
+                UIManager.Instance.DisplaySchoolPanel();
+            }
+            else
+            {
+                UIManager.Instance.HideSchoolPanel();
+            }
+        }
+        UIManager.Instance.DisplayPeopleInfoPanel();
+    }
+
+    //Choose building type
 
     public void ChangeBuildToHouse()
     {
@@ -94,6 +118,9 @@ public class spawnBuilding : MonoBehaviour
     {
         _buildSelected = _museum;
     }
+
+    //Build Mode (enter / exit)
+
     public void EnterBuildMode()
     {
         IsInBuildMode = true;
@@ -108,6 +135,7 @@ public class spawnBuilding : MonoBehaviour
             }
         }
     }
+
     public void ExitBuildMode()
     {
         IsInBuildMode = false;
@@ -117,6 +145,9 @@ public class spawnBuilding : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Make a preview of the position for the new build
+    /// </summary>
     private void BuildPreviewUpdate()
     {
         Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -144,6 +175,10 @@ public class spawnBuilding : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// Spawns new builds
+    /// </summary>
     private void SpawnAtMousePos()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -154,14 +189,74 @@ public class spawnBuilding : MonoBehaviour
             {
                 if (hit.collider.tag == "buildingZone" && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    GameObject newBuild = Instantiate(_underConstruction, hit.point, Quaternion.identity);
-                    newBuild.transform.parent = _buildParent.transform;
-                    newBuild.GetComponent<underConstructionBuildManager>().buildObjective = _buildSelected;
-                    newBuild.GetComponent<underConstructionBuildManager>().buildParent = _buildParent;
-                    newBuild.GetComponent<underConstructionBuildManager>().parent = gameObject;
-                    buildList.Add(newBuild);
+                    CheckForRessources();
+                    if (_woodNeeded < GameManager.Instance.WoodQuantity && _stoneNeeded < GameManager.Instance.StoneQuantity)
+                    {
+                        List<GameObject> _availableMasons = new();
+
+                        foreach (GameObject mason in GameManager.Instance.Masons)
+                        {
+                            if (mason.GetComponent<Population>().CanMove == true)
+                            {
+                                _availableMasons.Add(mason);
+                            }
+                        }
+
+                        if (_availableMasons.Count > 0) //Check if a mason is available
+                        {
+                            //Build the monument
+
+                            GameObject newBuild = Instantiate(_underConstruction, hit.point, Quaternion.identity);
+                            newBuild.transform.parent = _buildParent.transform;
+                            newBuild.GetComponent<underConstructionBuildManager>().buildObjective = _buildSelected;
+                            newBuild.GetComponent<underConstructionBuildManager>().buildParent = _buildParent;
+                            newBuild.GetComponent<underConstructionBuildManager>().parent = gameObject;
+                            buildList.Add(newBuild);
+
+                            //assign a mason to it
+
+                            GameObject _randomMason = _availableMasons[Random.Range(0, GameManager.Instance.Masons.Count - 1)];
+                            _randomMason.GetComponent<Population>().CanMove = false;
+                            _randomMason.GetComponent<Population>().TargetPs = newBuild.transform.position;
+
+                            //collect the price
+
+                            GameManager.Instance.WoodQuantity -= _woodNeeded;
+                            GameManager.Instance.StoneQuantity -= _stoneNeeded;
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Check if the needed ressources are available to build
+    /// </summary>
+    private void CheckForRessources()
+    {
+        switch (_buildSelected.name)
+        {
+            case "House":
+                _woodNeeded = _buildSelected.GetComponent<houseBuildInfo>().woodPrice;
+                _stoneNeeded = _buildSelected.GetComponent<houseBuildInfo>().stonePrice;
+                break;
+            case "Farm":
+                _woodNeeded = _buildSelected.GetComponent<farmBuildInfo>().woodPrice;
+                _stoneNeeded = _buildSelected.GetComponent<farmBuildInfo>().stonePrice;
+                break;
+            case "School":
+                _woodNeeded = _buildSelected.GetComponent<schoolBuildInfo>().woodPrice;
+                _stoneNeeded = _buildSelected.GetComponent<schoolBuildInfo>().stonePrice;
+                break;
+            case "Museum":
+                _woodNeeded = _buildSelected.GetComponent<museumBuildInfo>().woodPrice;
+                _stoneNeeded = _buildSelected.GetComponent<museumBuildInfo>().stonePrice;
+                break;
+            case "Library":
+                _woodNeeded = _buildSelected.GetComponent<libraryBuildInfo>().woodPrice;
+                _stoneNeeded = _buildSelected.GetComponent<libraryBuildInfo>().stonePrice;
+                break;
         }
     }
 }

@@ -6,8 +6,8 @@ using UnityEngine.ProBuilder;
 
 public class TopDownCameraManager : MonoBehaviour
 {
-    [SerializeField]
-    private float _cameraSpeed = 0.0f;
+
+    public float CameraSpeed = 0.0f;
     [SerializeField]
     private float _cameraZoomSpeed = 0.0f;
     [SerializeField]
@@ -37,6 +37,11 @@ public class TopDownCameraManager : MonoBehaviour
         cameraControls.Disable();
     }
 
+    private void Awake()
+    {
+        
+    }
+
     void Update()
     {
         if (Input.mousePosition.x < Screen.width / 100)
@@ -55,8 +60,8 @@ public class TopDownCameraManager : MonoBehaviour
         {
             _cameraMoveWithBorder.y = 1;
         }
-        _cameraMoveWithBorder *= Time.deltaTime * _cameraSpeed;
-        _cameraMove = cameraControls.ReadValue<Vector2>() * Time.deltaTime * _cameraSpeed;
+        _cameraMoveWithBorder *= Time.deltaTime * CameraSpeed;
+        _cameraMove = cameraControls.ReadValue<Vector2>() * Time.deltaTime * CameraSpeed;
         _cameraZoom = -Mouse.current.scroll.ReadValue().normalized.y * Time.deltaTime * _cameraZoomSpeed;
         if (_cameraMove != Vector2.zero)
         {

@@ -16,14 +16,13 @@ public class Clock : MonoBehaviour
 
     public int ActualDay = 1;
 
-    private bool _isDayFinished = false;
-
     private bool _isActivated = false;
 
     private void Start()
     {
         ActualDay = 1;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -40,20 +39,36 @@ public class Clock : MonoBehaviour
             ActualHour += 1;
             ActualMinute = 00.00f;
 
-            if(ActualHour == _dayFinishHour)
+            if (ActualHour == _dayStartHour - 1 || ActualHour == _dayFinishHour - 1)
             {
-                GameManager.Instance.IsDayRunning = false;
-
+                _isActivated = false;
             }
 
-            if (ActualHour == _dayStartHour)
+            if (ActualHour == _dayFinishHour && _isActivated == false)
+            {
+                GameManager.Instance.IsDayRunning = false;
+                _isActivated = true;
+                Debug.Log("fin de journée");
+                GameManager.Instance.CheckIfEnoughFood();
+                GameManager.Instance.CheckForHouses();
+                GameManager.Instance.AddHappiness();
+
+                foreach (GameObject people in GameManager.Instance.AllPeople)
+                {
+                    people.GetComponent<PeopleProperties>().Age++;
+                    people.GetComponent<PeopleProperties>().CheckForAge();
+                }
+            }
+
+            if (ActualHour == _dayStartHour && _isActivated == false)
             {
                 GameManager.Instance.IsDayRunning = true;
                 foreach (GameObject people in GameManager.Instance.AllPeople)
                 {
                     people.GetComponent<Population>().HasAHouse = false;
+                    people.GetComponent<Population>().CanMove = true;
                 }
-                _isActivated=true;
+                _isActivated = true;
             }
 
             if (ActualHour >= 24)
@@ -65,21 +80,6 @@ public class Clock : MonoBehaviour
         else
         {
             ActualMinute += Time.deltaTime*10;
-        }
-
-        if(!GameManager.Instance.IsDayRunning && !_isActivated)
-        {
-            GameManager.Instance.CheckIfEnoughFood();
-            GameManager.Instance.CheckForHouses();
-            GameManager.Instance.AddHappiness();
-
-            foreach (GameObject people in GameManager.Instance.AllPeople)
-            {
-                people.GetComponent<PeopleProperties>().Age++;
-                people.GetComponent<PeopleProperties>().CheckForAge();
-            }
-
-            _isActivated = true;
         }
     }
 

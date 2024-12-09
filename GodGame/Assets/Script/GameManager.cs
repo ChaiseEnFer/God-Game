@@ -6,10 +6,9 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    //Singleton
     public static GameManager Instance;
 
-    [SerializeField]
-    private spawnBuilding spawnBuildingScript;
 
     private void Awake()
     {
@@ -23,7 +22,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Listes contenant les peoples selon leur métier
+    //Lists than contains people according to their jobs
     public List<GameObject> AllPeople = new();
 
     public List<GameObject> Wanderers = new();
@@ -32,7 +31,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Miners = new();
     public List<GameObject> Masons = new();
 
-    //variables publiques
+    //publics variables
     public GameObject SelectedCharacter;
     public int EntitiesNumber = 0;
     public int FoodQuantity;
@@ -41,13 +40,88 @@ public class GameManager : MonoBehaviour
     public int WoodQuantity;
     public int StoneQuantity;
 
-    //variables privées
-    private int _maxHappiness;
-
-    //Methodes a appeler a chaque fin de jour
+    //privates variables
+    [SerializeField]
+    private spawnBuilding spawnBuildingScript;
+    private readonly int _maxHappiness = 100;
 
     /// <summary>
-    /// Cette méthode vérifie pour chaque people fatigué, s'il y a un lit de disponible et lui permet de se reposer
+    /// Method that attribute or reattribute a job to people
+    /// </summary>
+    /// <param name="job">The new job</param>
+    public void SendToSchool(int job)
+    {
+        int _lastJob = SelectedCharacter.GetComponent<PeopleProperties>().Job;
+        RemoveAffiliation(_lastJob, SelectedCharacter);
+        SelectedCharacter.GetComponent<PeopleProperties>().Job = job;
+        AddAffiliation(job);
+
+        List<GameObject> _allSchools = new();
+        foreach (GameObject build in spawnBuildingScript.buildList)
+        {
+            if (build.CompareTag("school"))
+            {
+                if (build.GetComponent<schoolBuildInfo>().IsFree == true)
+                {
+                    SelectedCharacter.GetComponent<Population>().TargetPs = build.transform.position;
+                    build.GetComponent<schoolBuildInfo>().IsFree = false;
+                    SelectedCharacter.GetComponent<Population>().CanMove = false;
+                    return;
+                }
+            }
+        }
+    }
+
+    //Those methods will update the list the people is in
+
+    private void RemoveAffiliation(int job, GameObject people)
+    {
+        switch (job)
+        {
+            case 0:
+                Wanderers.Remove(people);
+                break;
+            case 1:
+                FoodHarvesters.Remove(people);
+                break;
+            case 2:
+                Timbers.Remove(people);
+                break;
+            case 3:
+                Miners.Remove(people);
+                break;
+            case 4:
+                Masons.Remove(people);
+                break;
+        }
+    }
+
+    private void AddAffiliation(int _newJob)
+    {
+        switch (_newJob)
+        {
+            default:
+                Wanderers.Add(SelectedCharacter);
+                break;
+            case 1:
+                FoodHarvesters.Add(SelectedCharacter);
+                break;
+            case 2:
+                Timbers.Add(SelectedCharacter);
+                break;
+            case 3:
+                Miners.Add(SelectedCharacter);
+                break;
+            case 4:
+                Masons.Add(SelectedCharacter);
+                break;
+        }
+    }
+
+    //Call every end of day
+
+    /// <summary>
+    /// This method checks if there is a bed available for each tired person and allows them to rest.
     /// </summary>
     public void CheckForHouses()
     {
@@ -76,32 +150,39 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Cette méthode vérifie que personne ne manque de nourriture et sinon les tuent
+    /// This method checks that no one is lacking food and if not, they die
     /// </summary>
     public void CheckIfEnoughFood()
     {
         if (FoodQuantity > AllPeople.Count)
         {
+            Debug.Log("everybody survived");
             FoodQuantity -= AllPeople.Count;
         }
         else
         {
-            for (int i = 0; i < FoodQuantity; i++)
+            Debug.Log(AllPeople.Count);
+
+            for (int i = 0; i < AllPeople.Count - FoodQuantity; i++)
             {
+                Debug.Log(AllPeople.Count);
                 int randomIndex = Random.Range(0, AllPeople.Count);
 
                 GameObject peopleToDestroy = AllPeople[randomIndex];
                 AllPeople.Remove(peopleToDestroy);
+                RemoveAffiliation(peopleToDestroy.GetComponent<PeopleProperties>().Job, peopleToDestroy);
+                Debug.Log(peopleToDestroy);
                 Destroy(peopleToDestroy);
-                FoodQuantity = 0;
+                EntitiesNumber--;
             }
+            FoodQuantity = 0;
         }
     }
 
     /// <summary>
-    /// Ajoute le bonheur selon le nombre de batiments qui en produisent
+    /// Add happiness based on the number of buildings that produce it.
     /// </summary>
-    public void AddHappiness() // A rédiger une fois qu'on aura merge le taf de victor
+    public void AddHappiness()
     {
         foreach (GameObject build in spawnBuildingScript.buildList)
         {
@@ -116,10 +197,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Conditions de fin de partie
+    //End game conditions
 
     /// <summary>
-    /// Verifie la condition de décimation de la population
+    /// Check if everybody's dead
     /// </summary>
     public void CheckForDecimatedPopulation()
     {
@@ -130,7 +211,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Verifie la condition de victoire : bonheur au max
+    /// Check wincon : ma happiness
     /// </summary>
     public void CheckForHappiness()
     {
