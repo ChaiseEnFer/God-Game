@@ -49,9 +49,11 @@ public class Clock : MonoBehaviour
                 GameManager.Instance.IsDayRunning = false;
                 _isActivated = true;
                 Debug.Log("fin de journée");
-                GameManager.Instance.CheckIfEnoughFood();
+                GameManager.Instance.MakeThemExhausted();
                 GameManager.Instance.CheckForHouses();
+                GameManager.Instance.CheckIfEnoughFood();
                 GameManager.Instance.AddHappiness();
+                GameManager.Instance.CheckForHappiness();
 
                 foreach (GameObject people in GameManager.Instance.AllPeople)
                 {

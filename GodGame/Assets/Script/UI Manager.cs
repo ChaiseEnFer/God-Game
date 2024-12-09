@@ -19,7 +19,8 @@ public class UIManager : MonoBehaviour
             Instance = this;
         }
     }
-
+    [SerializeField]
+    private Slider _happinessSlider;
     [SerializeField]
     private spawnBuilding buildHandler;
     [SerializeField]
@@ -30,9 +31,6 @@ public class UIManager : MonoBehaviour
     public GameObject SchoolPanel;
     public GameObject BuildPanel;
     public GameObject PInfoPanel;
-
-
-
 
     /// <summary>
     /// Fonction servant a afficher le panel montrant le choix des metiers
@@ -125,5 +123,10 @@ public class UIManager : MonoBehaviour
             _isAccelerated = false;
             Time.timeScale = 1;
         }
+    }
+
+    public void UpdateSlider()
+    {
+        _happinessSlider.value = GameManager.Instance.ActualHappiness;
     }
 }

@@ -121,6 +121,29 @@ public class GameManager : MonoBehaviour
     //Call every end of day
 
     /// <summary>
+    /// Make workers tired
+    /// </summary>
+    public void MakeThemExhausted()
+    {
+        foreach (GameObject worker in GameManager.Instance.FoodHarvesters)
+        {
+            worker.GetComponent<PeopleProperties>().IsTired = true;
+        }
+        foreach (GameObject worker in GameManager.Instance.Timbers)
+        {
+            worker.GetComponent<PeopleProperties>().IsTired = true;
+        }
+        foreach (GameObject worker in GameManager.Instance.Miners)
+        {
+            worker.GetComponent<PeopleProperties>().IsTired = true;
+        }
+        foreach (GameObject worker in GameManager.Instance.Masons)
+        {
+            worker.GetComponent<PeopleProperties>().IsTired = true;
+        }
+    }
+
+    /// <summary>
     /// This method checks if there is a bed available for each tired person and allows them to rest.
     /// </summary>
     public void CheckForHouses()
@@ -132,11 +155,23 @@ public class GameManager : MonoBehaviour
             {
                 if (_availableHouses.Count == 0)
                 {
+                    foreach(GameObject worker in AllPeople) //Lower the happiness for each tired worker without bed
+                    {
+                        if (worker.GetComponent<PeopleProperties>().IsTired)
+                        {
+                            if (ActualHappiness > 0)
+                            {
+                                ActualHappiness--;
+                                UIManager.Instance.UpdateSlider();
+                            }
+                        }
+                    }
                     return;
                 }
+
                 else
                 {
-                    foreach (GameObject house in _availableHouses)
+                    foreach (GameObject house in _availableHouses)  //Send Workers to bed
                     {
                         people.GetComponent<PeopleProperties>().IsTired = false;
                         people.GetComponent<Population>().HasAHouse = true;
@@ -161,9 +196,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(AllPeople.Count);
-
-            for (int i = 0; i < AllPeople.Count - FoodQuantity; i++)
+            int rounds = AllPeople.Count - FoodQuantity;
+            
+            for (int i = 0; i < rounds; i++)
             {
                 Debug.Log(AllPeople.Count);
                 int randomIndex = Random.Range(0, AllPeople.Count);
@@ -171,8 +206,13 @@ public class GameManager : MonoBehaviour
                 GameObject peopleToDestroy = AllPeople[randomIndex];
                 AllPeople.Remove(peopleToDestroy);
                 RemoveAffiliation(peopleToDestroy.GetComponent<PeopleProperties>().Job, peopleToDestroy);
-                Debug.Log(peopleToDestroy);
-                Destroy(peopleToDestroy);
+                peopleToDestroy.GetComponent<PeopleProperties>().Death();
+
+                if (ActualHappiness > 0)
+                {
+                    ActualHappiness--;
+                    UIManager.Instance.UpdateSlider();
+                }
                 EntitiesNumber--;
             }
             FoodQuantity = 0;
@@ -194,7 +234,9 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log(build.GetComponent<museumBuildInfo>().happynessGiven.ToString());
             }
+            UIManager.Instance.UpdateSlider();
         }
+
     }
 
     //End game conditions
@@ -215,6 +257,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CheckForHappiness()
     {
+        UIManager.Instance.UpdateSlider();
+
         if (ActualHappiness >= _maxHappiness)
         {
             //FIN DE PARTIE - VICTOIRE

@@ -45,7 +45,7 @@ public class PeopleProperties : MonoBehaviour
         }
     }
 
-    private void Death()
+    public void Death()
     {
         if (GameManager.Instance.SelectedCharacter == this.gameObject)
         {
