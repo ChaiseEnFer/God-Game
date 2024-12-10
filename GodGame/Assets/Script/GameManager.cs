@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
                     if (build.GetComponent<schoolBuildInfo>().CurrentOccupants == build.GetComponent<schoolBuildInfo>().MaxOccupants)
                         build.GetComponent<schoolBuildInfo>().IsFree = false;
 
-                    SelectedCharacter.GetComponent<Population>().CanMove = false;
+                    //SelectedCharacter.GetComponent<Population>().CanMove = false;
                     return;
                 }
             }
@@ -174,16 +174,16 @@ public class GameManager : MonoBehaviour
                     return;
                 }
 
+
                 else
                 {
-                    foreach (GameObject house in _availableHouses)  //Send Workers to bed
-                    {
+
+                        GameObject house = _availableHouses[0];
                         people.GetComponent<PeopleProperties>().IsTired = false;
                         people.GetComponent<Population>().HasAHouse = true;
                         people.GetComponent<PeopleProperties>().Tireness = 100;
                         people.GetComponent<Population>().TargetPs = house.transform.position;
                         _availableHouses.Remove(house);
-                    }
                 }
             }
         }

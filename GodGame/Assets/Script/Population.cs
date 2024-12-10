@@ -88,7 +88,7 @@ public class Population : MonoBehaviour
     /// </summary>
     private void Move()
     {
-        if (IsDestinationSet)
+        if (!IsDestinationSet)
         {
             SetDayDestination();
         }
