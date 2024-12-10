@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -269,5 +270,14 @@ public class GameManager : MonoBehaviour
         {
             Instance.GetComponent<MainMenuHandler>().LoadScene("WinScene");
         }
+    }
+
+    public void EntrerFpsView()
+    {
+        SelectedCharacter.GetComponent<CinemachineVirtualCamera>().enabled = true;
+    }
+    public void ExitFpsView()
+    {
+        SelectedCharacter.GetComponent<CinemachineVirtualCamera>().enabled = false;
     }
 }
