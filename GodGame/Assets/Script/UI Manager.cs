@@ -66,23 +66,28 @@ public class UIManager : MonoBehaviour
         switch (job)
         {
             case 0:
-            GameManager.Instance.SelectedCharacter = GameManager.Instance.Wanderers[Random.Range(0, GameManager.Instance.Wanderers.Count -1)];
+                if (GameManager.Instance.Wanderers.Count > 0)
+                    GameManager.Instance.SelectedCharacter = GameManager.Instance.Wanderers[Random.Range(0, GameManager.Instance.Wanderers.Count -1)];
                 break;
 
             case 1:
-            GameManager.Instance.SelectedCharacter = GameManager.Instance.FoodHarvesters[Random.Range(0, GameManager.Instance.FoodHarvesters.Count -1)];
+                if (GameManager.Instance.FoodHarvesters.Count > 0)
+                    GameManager.Instance.SelectedCharacter = GameManager.Instance.FoodHarvesters[Random.Range(0, GameManager.Instance.FoodHarvesters.Count -1)];
                 break;
 
             case 2:
-                GameManager.Instance.SelectedCharacter = GameManager.Instance.Timbers[Random.Range(0, GameManager.Instance.Timbers.Count - 1)];
+                if (GameManager.Instance.Timbers.Count > 0)
+                    GameManager.Instance.SelectedCharacter = GameManager.Instance.Timbers[Random.Range(0, GameManager.Instance.Timbers.Count - 1)];
                 break;
 
             case 3:
-            GameManager.Instance.SelectedCharacter = GameManager.Instance.Miners[Random.Range(0, GameManager.Instance.Miners.Count -1)];
+                if (GameManager.Instance.Miners.Count > 0)
+                    GameManager.Instance.SelectedCharacter = GameManager.Instance.Miners[Random.Range(0, GameManager.Instance.Miners.Count -1)];
                 break;
 
             case 4:
-            GameManager.Instance.SelectedCharacter = GameManager.Instance.Masons[Random.Range(0, GameManager.Instance.Masons.Count -1)];
+                if (GameManager.Instance.Masons.Count > 0)
+                    GameManager.Instance.SelectedCharacter = GameManager.Instance.Masons[Random.Range(0, GameManager.Instance.Masons.Count -1)];
                 break;
         }
 

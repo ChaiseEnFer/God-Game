@@ -118,9 +118,13 @@ public class Population : MonoBehaviour
                         break;
                 }
             }
-            else
+            else if (GameManager.Instance.IsDayRunning)
             {
                 RegularMoving();
+            }
+            else
+            {
+                RandomMoving();
             }
         }
         else
