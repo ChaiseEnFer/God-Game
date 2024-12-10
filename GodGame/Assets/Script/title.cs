@@ -19,14 +19,23 @@ public class title : MonoBehaviour
     [SerializeField]
     GameObject montp;
 
-    private int _state = 0;
+    private int _state = 10;
     private int _speed = 6;
     private string _move = "";
+    private float _timer = 0f;
 
 
     // Update is called once per frame
     void Update()
     {
+        if (_state == 10)
+        {
+            _timer += Time.deltaTime;
+            if (_timer > 2f)
+            {
+                _state = 0;
+            }
+        }
         if (_state == 0)
         {
             mini.transform.position = Vector3.Lerp(mini.transform.position, new Vector3(616, 580, 0), _speed * Time.deltaTime);
@@ -86,6 +95,7 @@ public class title : MonoBehaviour
         }
         if (_move == "up")
         {
+
             transform.position = Vector3.Lerp(transform.position, new Vector3(0,1000, 0), _speed * Time.deltaTime);
         }
         if (_move == "down")
@@ -97,6 +107,13 @@ public class title : MonoBehaviour
 
     public void moveUp()
     {
+        mini.transform.position = new Vector3(616, 580, 0);
+        turbo.transform.position =new Vector3(1311, 692, 0);
+        neww.transform.position = new Vector3(613, 816, 0);
+        le64.transform.position = new Vector3(1415, 357, 0);
+        super.transform.position = new Vector3(975, 732, 0);
+        deux.transform.position = new Vector3(1389, 572, 0);
+        montp.transform.position = new Vector3(1004, 439, 0);
         _move = "up";
     }
     public void moveDown()
