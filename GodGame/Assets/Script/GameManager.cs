@@ -252,18 +252,6 @@ public class GameManager : MonoBehaviour
     //End game conditions
 
     /// <summary>
-    /// Check if everybody's dead
-    /// </summary>
-    public void CheckForDecimatedPopulation()
-    {
-        if (AllPeople.Count <= 0)
-        {
-            Debug.Log("caca");
-            Instance.GetComponent<MainMenuHandler>().LoadScene("LoseScene");
-        }
-    }
-
-    /// <summary>
     /// Check wincon : ma happiness
     /// </summary>
     public void CheckForHappiness()
