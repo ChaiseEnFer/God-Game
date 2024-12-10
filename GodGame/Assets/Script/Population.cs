@@ -95,10 +95,11 @@ public class Population : MonoBehaviour
 
         if (CanMove)
         {
-            if (GameManager.Instance.IsDayRunning || !HasAHouse)
+            if (GameManager.Instance.IsDayRunning && !_propertiesScript.IsTired)
             {
                 switch (_propertiesScript.Job)
                 {
+                   
                     case 0:
                         RandomMoving();
                         break;
@@ -121,9 +122,9 @@ public class Population : MonoBehaviour
 
                 }
             }
-            else if (GameManager.Instance.IsDayRunning)
+            else if (HasAHouse)
             {
-                RegularMoving();
+            RegularMoving();
             }
             else
             {

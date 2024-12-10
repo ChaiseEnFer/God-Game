@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
                     if (build.GetComponent<schoolBuildInfo>().CurrentOccupants == build.GetComponent<schoolBuildInfo>().MaxOccupants)
                         build.GetComponent<schoolBuildInfo>().IsFree = false;
 
-                    //SelectedCharacter.GetComponent<Population>().CanMove = false;
+                    SelectedCharacter.GetComponent<Population>().CanMove = false;
                     return;
                 }
             }
