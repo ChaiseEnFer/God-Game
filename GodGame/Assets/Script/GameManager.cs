@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
                     RemoveAffiliation(_lastJob, SelectedCharacter);
                     SelectedCharacter.GetComponent<PeopleProperties>().Job = job;
                     AddAffiliation(job);
+                    SelectedCharacter.GetComponent<PeopleProperties>().ChangeSkin();
 
                     SelectedCharacter.GetComponent<Population>().TargetPs = build.transform.position;
 

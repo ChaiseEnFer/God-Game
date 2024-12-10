@@ -11,7 +11,28 @@ public class PeopleProperties : MonoBehaviour
     public int Tireness = 100;
     public int Age;
 
+    [SerializeField]
+    public Material Miner;
 
+    [SerializeField]
+    public Material Timber;
+
+    [SerializeField]
+    public Material Wanderer;
+
+    [SerializeField]
+    public Material Harvester;
+
+    [SerializeField]
+    public Material Mason;
+
+
+
+
+    private void Start()
+    {
+        ChangeSkin();
+    }
 
     /// <summary>
     /// Cette fonction sera appelée pour vérifier si l'unité doit se reposer
@@ -53,5 +74,27 @@ public class PeopleProperties : MonoBehaviour
             UIManager.Instance.HideSchoolPanel();
         }
         Destroy(gameObject);
+    }
+
+    public void ChangeSkin()
+    {
+        switch (Job) 
+        { 
+            case 0:
+                gameObject.GetComponent<MeshRenderer>().material = Wanderer;
+                break;
+            case 1:
+                gameObject.GetComponent<MeshRenderer>().material = Harvester;
+                break;
+            case 2:
+                gameObject.GetComponent<MeshRenderer>().material = Timber;
+                break;
+            case 3:
+                gameObject.GetComponent <MeshRenderer>().material = Miner; 
+                break;
+            case 4:
+                gameObject.GetComponent<MeshRenderer>().material = Mason;
+                break;
+        }
     }
 }

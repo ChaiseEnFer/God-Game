@@ -151,6 +151,11 @@ MonoBehaviour:
   IsTired: 0
   Tireness: 100
   Age: 0
+  Miner: {fileID: 2100000, guid: 21ea355852dbc4d4d9e57122f0578e43, type: 2}
+  Timber: {fileID: 2100000, guid: c73f2786d06b1194da8f2697888d5ca2, type: 2}
+  Wanderer: {fileID: 2100000, guid: e776f790b07eac84595970954ecae4a9, type: 2}
+  Harvester: {fileID: 2100000, guid: 7a73a251c17b7c64e8f21f6b34154ae5, type: 2}
+  Mason: {fileID: 2100000, guid: d9cf2ec42453a544da3b9e109b74ab67, type: 2}
 --- !u!136 &7255284407301313644
 CapsuleCollider:
   m_ObjectHideFlags: 0
