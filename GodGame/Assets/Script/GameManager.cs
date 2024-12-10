@@ -211,6 +211,7 @@ public class GameManager : MonoBehaviour
                 AllPeople.Remove(peopleToDestroy);
                 RemoveAffiliation(peopleToDestroy.GetComponent<PeopleProperties>().Job, peopleToDestroy);
                 peopleToDestroy.GetComponent<PeopleProperties>().Death();
+                
 
                 if (ActualHappiness > 0)
                 {
@@ -218,6 +219,11 @@ public class GameManager : MonoBehaviour
                     UIManager.Instance.UpdateSlider();
                 }
                 EntitiesNumber--;
+            }
+            if (AllPeople.Count <= 0)
+            {
+                Debug.Log("caca");
+                Instance.GetComponent<MainMenuHandler>().LoadScene("LoseScene");
             }
             FoodQuantity = 0;
         }
@@ -252,7 +258,8 @@ public class GameManager : MonoBehaviour
     {
         if (AllPeople.Count <= 0)
         {
-            //FIN DE PARTIE - DEFAITE
+            Debug.Log("caca");
+            Instance.GetComponent<MainMenuHandler>().LoadScene("LoseScene");
         }
     }
 
@@ -265,7 +272,7 @@ public class GameManager : MonoBehaviour
 
         if (ActualHappiness >= _maxHappiness)
         {
-            //FIN DE PARTIE - VICTOIRE
+            Instance.GetComponent<MainMenuHandler>().LoadScene("WinScene");
         }
     }
 }
