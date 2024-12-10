@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   woodPrice: 2
   stonePrice: 1
-  maxPeopleIn: 0
+  maxPeopleIn: 3
   currentPeopleIn: 0
 --- !u!208 &6134263176608859984
 NavMeshObstacle:

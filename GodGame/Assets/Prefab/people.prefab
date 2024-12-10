@@ -126,9 +126,14 @@ MonoBehaviour:
   _seuil: 1.05
   _radius: 10
   _chrono: 0.5
+  MineTarget: {fileID: 0}
+  HarvestTarget: {fileID: 0}
+  ForestTarget: {fileID: 0}
   _propertiesScript: {fileID: -2009266367800093188}
   TargetPs: {x: 0, y: 0, z: 0}
+  CanMove: 1
   HasAHouse: 0
+  IsDestinationSet: 0
 --- !u!114 &-2009266367800093188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityName: 
-  JobName: 
   Job: 0
   IsTired: 0
   Tireness: 100

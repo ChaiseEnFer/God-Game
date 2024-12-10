@@ -13,15 +13,23 @@ public class Clock : MonoBehaviour
 
     public float ActualMinute = 00.00f;
 
-    public int ActualHour = 0;
+    public int ActualHour = 8;
 
     public int ActualDay = 1;
 
     private bool _isActivated = false;
 
     [SerializeField]
-    private Light _timeSet;
-    private float _lightIntensity = 0f;
+    private Light _sunLight;
+
+    [SerializeField]
+    private AudioSource _audioSource;
+
+    [SerializeField]
+    private AudioClip _soundsSun;
+
+    [SerializeField]
+    private AudioClip _soundsNight;
 
     private void Start()
     {
@@ -46,9 +54,16 @@ public class Clock : MonoBehaviour
                 AddRessources();
             ActualMinute = 00.00f;
 
-            _lightIntensity = ((12 - (ActualHour  % 12)) / 12);
-            _timeSet.intensity = _lightIntensity;
-            Debug.Log(_lightIntensity);
+            if(ActualHour == _dayStartHour)
+            {
+                _sunLight.intensity = 1f;
+                _audioSource.PlayOneShot(_soundsSun);
+            }
+            if (ActualHour == _dayFinishHour) 
+            {
+                _sunLight.intensity = 0f;
+                _audioSource.PlayOneShot(_soundsNight);
+            }
 
             if (ActualHour == _dayStartHour - 1 || ActualHour == _dayFinishHour - 1)
             {

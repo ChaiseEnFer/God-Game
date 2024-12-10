@@ -178,12 +178,19 @@ public class GameManager : MonoBehaviour
                 else
                 {
 
-                        GameObject house = _availableHouses[0];
-                        people.GetComponent<PeopleProperties>().IsTired = false;
-                        people.GetComponent<Population>().HasAHouse = true;
-                        people.GetComponent<PeopleProperties>().Tireness = 100;
-                        people.GetComponent<Population>().TargetPs = house.transform.position;
+                    GameObject house = _availableHouses[0];
+                    people.GetComponent<PeopleProperties>().IsTired = false;
+                    people.GetComponent<Population>().HasAHouse = true;
+                    people.GetComponent<PeopleProperties>().Tireness = 100;
+                    people.GetComponent<Population>().TargetPs = house.transform.position;
+                    if (house.GetComponent<houseBuildInfo>().currentPeopleIn == house.GetComponent<houseBuildInfo>().maxPeopleIn-1)
+                    {
                         _availableHouses.Remove(house);
+                    }
+                    else
+                    {
+                        house.GetComponent<houseBuildInfo>().currentPeopleIn++;
+                    }
                 }
             }
         }
@@ -222,7 +229,6 @@ public class GameManager : MonoBehaviour
             }
             if (AllPeople.Count <= 0)
             {
-                Debug.Log("caca");
                 Instance.GetComponent<MainMenuHandler>().LoadScene("LoseScene");
             }
             FoodQuantity = 0;
