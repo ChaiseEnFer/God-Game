@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class Clock : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Clock : MonoBehaviour
     public int ActualDay = 1;
 
     private bool _isActivated = false;
+
+    [SerializeField]
+    private Light _timeSet;
+    private float _lightIntensity = 0f;
 
     private void Start()
     {
@@ -40,6 +45,10 @@ public class Clock : MonoBehaviour
             if (GameManager.Instance.IsDayRunning)
                 AddRessources();
             ActualMinute = 00.00f;
+
+            _lightIntensity = ((12 - (ActualHour  % 12)) / 12);
+            _timeSet.intensity = _lightIntensity;
+            Debug.Log(_lightIntensity);
 
             if (ActualHour == _dayStartHour - 1 || ActualHour == _dayFinishHour - 1)
             {
