@@ -19,14 +19,23 @@ public class title : MonoBehaviour
     [SerializeField]
     GameObject montp;
 
-    private int _state = 0;
-    private int _speed = 3;
+    private int _state = 10;
+    private int _speed = 6;
+    private string _move = "";
+    private float _timer = 0f;
 
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(_state);
+        if (_state == 10)
+        {
+            _timer += Time.deltaTime;
+            if (_timer > 2f)
+            {
+                _state = 0;
+            }
+        }
         if (_state == 0)
         {
             mini.transform.position = Vector3.Lerp(mini.transform.position, new Vector3(616, 580, 0), _speed * Time.deltaTime);
@@ -38,7 +47,7 @@ public class title : MonoBehaviour
         if (_state == 1)
         {
             turbo.transform.position = Vector3.Lerp(turbo.transform.position, new Vector3(1311, 692, 0), _speed * Time.deltaTime);
-            if (turbo.transform.position.x < 1316)
+            if (turbo.transform.position.y < 697)
             {
                 _state = 2;
             }
@@ -78,11 +87,37 @@ public class title : MonoBehaviour
         if (_state == 6)
         {
             montp.transform.position = Vector3.Lerp(montp.transform.position, new Vector3(1004, 439, 0), _speed * Time.deltaTime);
-            if (deux.transform.position.y < 444)
+            if (montp.transform.position.y > 434)
             {
                 _state = 7;
+                Debug.Log("qrgrdswg");
             }
         }
+        if (_move == "up")
+        {
 
+            transform.position = Vector3.Lerp(transform.position, new Vector3(0,1000, 0), _speed * Time.deltaTime);
+        }
+        if (_move == "down")
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(0, 0, 0), _speed * Time.deltaTime);
+        }
+
+    }
+
+    public void moveUp()
+    {
+        mini.transform.position = new Vector3(616, 580, 0);
+        turbo.transform.position =new Vector3(1311, 692, 0);
+        neww.transform.position = new Vector3(613, 816, 0);
+        le64.transform.position = new Vector3(1415, 357, 0);
+        super.transform.position = new Vector3(975, 732, 0);
+        deux.transform.position = new Vector3(1389, 572, 0);
+        montp.transform.position = new Vector3(1004, 439, 0);
+        _move = "up";
+    }
+    public void moveDown()
+    {
+        _move = "down";
     }
 }
