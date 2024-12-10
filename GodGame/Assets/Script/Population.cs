@@ -40,6 +40,8 @@ public class Population : MonoBehaviour
     public bool CanMove = true;
     public bool HasAHouse = false;
 
+    public bool IsDestinationSet = false;
+
     private IEnumerator WaitBeforeMove()
     {
         yield return new WaitForSeconds(_chrono);
@@ -60,6 +62,7 @@ public class Population : MonoBehaviour
     private void Update()
     {
         Move();
+        Debug.Log(GameManager.Instance.IsDayRunning);
     }
 
     /// <summary>
@@ -85,28 +88,30 @@ public class Population : MonoBehaviour
     /// </summary>
     private void Move()
     {
+        if (IsDestinationSet)
+        {
+            SetDayDestination();
+        }
+
         if (CanMove)
         {
             if (GameManager.Instance.IsDayRunning || !HasAHouse)
             {
-                switch (_propertiesScript.Job) //terminer les jobs quand map faite et navmeshée
+                switch (_propertiesScript.Job)
                 {
                     case 0:
                         RandomMoving();
                         break;
 
                     case 1:
-                        TargetPs = new Vector3(HarvestTarget.transform.position.x + Random.Range(-15, 15), HarvestTarget.transform.position.y, HarvestTarget.transform.position.z + Random.Range(-15, 15));
                         RegularMoving();
                         break;
 
                     case 2:
-                        TargetPs = new Vector3(ForestTarget.transform.position.x + Random.Range(-15, 15), ForestTarget.transform.position.y, ForestTarget.transform.position.z + Random.Range(-15, 15));
                         RegularMoving();
                         break;
 
                     case 3:
-                        TargetPs = new Vector3(MineTarget.transform.position.x + Random.Range(-30, 30), MineTarget.transform.position.y, MineTarget.transform.position.z + Random.Range(-30, 30));
                         RegularMoving();
                         break;
 
@@ -114,8 +119,6 @@ public class Population : MonoBehaviour
                         RandomMoving();
                         break;
 
-                    default:
-                        break;
                 }
             }
             else if (GameManager.Instance.IsDayRunning)
@@ -131,6 +134,25 @@ public class Population : MonoBehaviour
         {
             RegularMoving();
         }
+    }
+
+    private void SetDayDestination()
+    {
+        switch (_propertiesScript.Job)
+        {
+            case 1:
+                TargetPs = new Vector3(HarvestTarget.transform.position.x + Random.Range(-15, 15), HarvestTarget.transform.position.y, HarvestTarget.transform.position.z + Random.Range(-15, 15));
+                break;
+
+            case 2:
+                TargetPs = new Vector3(ForestTarget.transform.position.x + Random.Range(-15, 15), ForestTarget.transform.position.y, ForestTarget.transform.position.z + Random.Range(-15, 15));
+                break;
+
+            case 3:
+                TargetPs = new Vector3(MineTarget.transform.position.x + Random.Range(-30, 30), MineTarget.transform.position.y, MineTarget.transform.position.z + Random.Range(-30, 30));
+                break;
+        }
+        IsDestinationSet = true;
     }
 
     private void RegularMoving()

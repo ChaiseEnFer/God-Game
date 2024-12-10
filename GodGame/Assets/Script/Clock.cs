@@ -73,6 +73,7 @@ public class Clock : MonoBehaviour
                 {
                     people.GetComponent<Population>().HasAHouse = false;
                     people.GetComponent<Population>().CanMove = true;
+                    people.GetComponent<Population>().IsDestinationSet = false;
                 }
                 _isActivated = true;
             }
