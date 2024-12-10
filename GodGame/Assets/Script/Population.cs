@@ -142,15 +142,15 @@ public class Population : MonoBehaviour
         switch (_propertiesScript.Job)
         {
             case 1:
-                TargetPs = new Vector3(HarvestTarget.transform.position.x + Random.Range(-15, 15), HarvestTarget.transform.position.y, HarvestTarget.transform.position.z + Random.Range(-15, 15));
+                TargetPs = new Vector3(HarvestTarget.transform.position.x + Random.Range(-10, 10), HarvestTarget.transform.position.y, HarvestTarget.transform.position.z + Random.Range(-10, 10));
                 break;
 
             case 2:
-                TargetPs = new Vector3(ForestTarget.transform.position.x + Random.Range(-15, 15), ForestTarget.transform.position.y, ForestTarget.transform.position.z + Random.Range(-15, 15));
+                TargetPs = new Vector3(ForestTarget.transform.position.x + Random.Range(-10, 10), ForestTarget.transform.position.y, ForestTarget.transform.position.z + Random.Range(-10, 10));
                 break;
 
             case 3:
-                TargetPs = new Vector3(MineTarget.transform.position.x + Random.Range(-30, 30), MineTarget.transform.position.y, MineTarget.transform.position.z + Random.Range(-30, 30));
+                TargetPs = new Vector3(MineTarget.transform.position.x + Random.Range(-20, 20), MineTarget.transform.position.y, MineTarget.transform.position.z + Random.Range(-20, 20));
                 break;
         }
         IsDestinationSet = true;
@@ -159,6 +159,7 @@ public class Population : MonoBehaviour
     private void RegularMoving()
     {
         _people.SetDestination(TargetPs);
+        Debug.Log(TargetPs);
     }
 
     private void RandomMoving()
