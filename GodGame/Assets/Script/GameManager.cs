@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     //privates variables
     [SerializeField]
-    private spawnBuilding spawnBuildingScript;
+    private spawnBuilding _spawnBuildingScript;
     private readonly int _maxHappiness = 100;
 
     /// <summary>
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     public void SendToSchool(int job)
     {
         List<GameObject> _allSchools = new();
-        foreach (GameObject build in spawnBuildingScript.buildList)
+        foreach (GameObject build in _spawnBuildingScript.buildList)
         {
             if (build.CompareTag("school"))
             {
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void CheckForHouses()
     {
-        List<GameObject> _availableHouses = spawnBuildingScript.houseList;
+        List<GameObject> _availableHouses = _spawnBuildingScript.houseList;
         foreach (GameObject people in AllPeople)
         {
             if (people.GetComponent<PeopleProperties>().IsTired )
@@ -207,17 +207,17 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            int rounds = AllPeople.Count - FoodQuantity;
+            int _rounds = AllPeople.Count - FoodQuantity;
             
-            for (int i = 0; i < rounds; i++)
+            for (int i = 0; i < _rounds; i++)
             {
                 Debug.Log(AllPeople.Count);
-                int randomIndex = Random.Range(0, AllPeople.Count);
+                int _randomIndex = Random.Range(0, AllPeople.Count);
 
-                GameObject peopleToDestroy = AllPeople[randomIndex];
-                AllPeople.Remove(peopleToDestroy);
-                RemoveAffiliation(peopleToDestroy.GetComponent<PeopleProperties>().Job, peopleToDestroy);
-                peopleToDestroy.GetComponent<PeopleProperties>().Death();
+                GameObject _peopleToDestroy = AllPeople[_randomIndex];
+                AllPeople.Remove(_peopleToDestroy);
+                RemoveAffiliation(_peopleToDestroy.GetComponent<PeopleProperties>().Job, _peopleToDestroy);
+                _peopleToDestroy.GetComponent<PeopleProperties>().Death();
                 
 
                 if (ActualHappiness > 0)
@@ -240,7 +240,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void AddHappiness()
     {
-        foreach (GameObject build in spawnBuildingScript.buildList)
+        foreach (GameObject build in _spawnBuildingScript.buildList)
         {
             if (build.tag == "library")
             {

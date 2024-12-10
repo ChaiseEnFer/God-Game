@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class farmBuildInfo : MonoBehaviour
 {
-    public int woodPrice;
-    public int stonePrice;
+    public int WoodPrice;
+    public int StonePrice;
 
-    public int maxPeopleIn;
-    public int currentPeopleIn;
+    public int MaxPeopleIn;
+    public int CurrentPeopleIn;
 }

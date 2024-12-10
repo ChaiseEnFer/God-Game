@@ -242,8 +242,8 @@ public class spawnBuilding : MonoBehaviour
                 _stoneNeeded = _buildSelected.GetComponent<houseBuildInfo>().stonePrice;
                 break;
             case "Farm":
-                _woodNeeded = _buildSelected.GetComponent<farmBuildInfo>().woodPrice;
-                _stoneNeeded = _buildSelected.GetComponent<farmBuildInfo>().stonePrice;
+                _woodNeeded = _buildSelected.GetComponent<farmBuildInfo>().WoodPrice;
+                _stoneNeeded = _buildSelected.GetComponent<farmBuildInfo>().StonePrice;
                 break;
             case "school":
                 _woodNeeded = _buildSelected.GetComponent<schoolBuildInfo>().woodPrice;
