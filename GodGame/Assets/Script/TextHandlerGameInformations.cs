@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class TextHandlerGameInformations : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI _textTimer;
