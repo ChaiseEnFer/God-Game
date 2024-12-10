@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene de test de Ren.unity
     guid: 8da306958dcce4a559f0bfe5672183ed
+  - enabled: 1
+    path: Assets/Scenes/LoseScene.unity
+    guid: f69640036a1a75f45aca4293208eeb27
+  - enabled: 1
+    path: Assets/Scenes/WinScene.unity
+    guid: 18e92addbeff4c94d9cb5583205c6b80
   m_configObjects: {}
